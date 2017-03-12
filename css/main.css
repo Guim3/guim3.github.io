@@ -1,7 +1,8 @@
 body {
     font-family: Bitter;
     margin: 60px auto;
-    width: 70%;
+    width: 750px;
+    max-width:80%;
 }
 nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/

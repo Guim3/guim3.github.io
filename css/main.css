@@ -26,12 +26,6 @@ footer ul {
     vertical-align: middle;
 }
 
-footer ul div {
-    /* This part is for the "powered by Jekyll" part */
-    text-align: right;
-    vertical-align: text-top;
-}
-
 nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;

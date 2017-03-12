@@ -3,13 +3,23 @@ body {
     margin: 60px auto;
     width: 70%;
 }
-nav ul, footer ul {
+nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;
     list-style: none;
     font-size: 25px;
     font-weight: bold;
 }
+
+footer ul {
+    font-family: Bitter;/*Monaco, Menlo, Consolas;*/
+    padding: 0px;
+    list-style: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
 nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;

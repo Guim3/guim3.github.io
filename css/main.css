@@ -1,11 +1,13 @@
 body {
+    font-family: Bitter;
     margin: 60px auto;
     width: 70%;
 }
 nav ul, footer ul {
-    font-family:Monaco, Menlo, Consolas;
+    font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;
     list-style: none;
+    font-size: 25px;
     font-weight: bold;
 }
 nav ul li, footer ul li {

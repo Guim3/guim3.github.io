@@ -23,6 +23,7 @@ footer ul {
     list-style: none;
     font-size: 13px;
     text-align: left;
+    vertical-align: middle;
 }
 
 footer ul div {

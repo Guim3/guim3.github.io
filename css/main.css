@@ -11,13 +11,12 @@ nav ul {
     font-weight: bold;
 }
 
-footer ul {
+footer {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;
     list-style: none;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
+    font-size: 13px;
+    text-align: right;
 }
 
 nav ul li, footer ul li {

@@ -3,3 +3,5 @@ markdown: kramdown
 permalink: /blog/:year/:month/:title
 gems:
   - jekyll-sitemap
+# Google services
+google_analytics: UA-93553973-1

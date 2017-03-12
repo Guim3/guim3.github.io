@@ -1,3 +1,5 @@
 name: Guim Perarnau
 markdown: kramdown
 permalink: /blog/:year/:month/:title
+gems:
+  - jekyll-sitemap

@@ -22,6 +22,10 @@ footer ul {
     padding: 0px;
     list-style: none;
     font-size: 13px;
+    text-align: left;
+}
+
+footer ul jek {
     text-align: right;
 }
 

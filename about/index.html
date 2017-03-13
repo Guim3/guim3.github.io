@@ -34,5 +34,12 @@ title: About
 		    </a>
 		</li>
 		{% endif %}
+		{% if site.quora_username %}
+		<li class="contact-item">
+		    <a href="https://www.quora.com/profile/{{ site.quora_username }}">
+		      <i class="fa-li fa fa-quora"></i> Quora
+		    </a>
+		</li>
+		{% endif %}
 	</ul>
 </div><!-- /.blurb -->

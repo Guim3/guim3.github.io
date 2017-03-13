@@ -43,6 +43,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+li.menu-item {
+    margin: 0 0 .9px 0;
+}
+
 name_heading {
 	font-family: Bitter;
 	font-size: 49px;

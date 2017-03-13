@@ -4,6 +4,7 @@ body {
     width: 750px;
     font-size: 16px;
     max-width:80%;
+    line-height: 25.6px;
 }
 nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
@@ -105,8 +106,4 @@ ul.posts {
 
 ul.posts li {
     list-style: none;
-}
-
-.contact-list {
-    display: inline-block;
 }

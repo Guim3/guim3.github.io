@@ -106,3 +106,7 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+.contact-list {
+    display: inline-block;
+}

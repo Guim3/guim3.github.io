@@ -44,8 +44,8 @@ a:hover {
     text-decoration: underline;
 }
 
-li.menu-item {
-    margin: 0 0 .9px 0;
+li {
+    margin: 10px 0;
 }
 
 name_heading {

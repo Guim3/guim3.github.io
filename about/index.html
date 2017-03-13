@@ -6,4 +6,28 @@ title: About
 <div class="blurb">
 	<p>Hi there, I'm Guim Perarnau!</p>
 	<p>I'm interested in applying deep learning to solve real world problems and create a super-human AI that will enslave us all.</p>
+
+	What I've been up to lately:
+	<ul>
+		<li>My research about <a href="projects/#icgan"> Invertible conditional GANs (IcGAN)</a> was accepted at the <a href="https://sites.google.com/site/nips2016adversarial/">NIPS 2016 Workshop on Adversarial Training</a>. I also gave a presentation about my work there.</li>
+		<li>I also had an interview with <a href="https://github.com/chadwittman/ai-guild">AI Guild</a> about the IcGAN.</li>
+	</ul>
+
+	<h3>Contact</h3>
+	<ul>
+		{% if site.github_username %}
+		<li>
+		    <a href="https://github.com/{{ site.github_username }}">
+		      <i class="fa fa-github fa-2x"></i> GitHub
+		    </a>
+		</li>
+		{% endif %}
+		{% if site.linkedin_username %}
+		<li>
+		    <a href="https://linkedin.com/in/{{ site.linkedin_username }}">
+		      <i class="fa fa-linkedin fa-2x"></i> LinkedIn
+		    </a>
+		</li>
+		{% endif %}
+	</ul>
 </div><!-- /.blurb -->

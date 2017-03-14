@@ -98,6 +98,10 @@ code {
 	line-height: 22.5px;
 }
 
+div.date, div.authors {
+    font-size: 13px;
+    color: #777777
+}
 
 ul.posts { 
     margin: 20px auto 40px; 

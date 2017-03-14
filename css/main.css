@@ -71,8 +71,18 @@ h3 {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 700;
-	line-height: 25px;
+	line-height: 25.6px;
 }
+
+h4 {
+    font-family: Bitter;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 25.6px;
+}
+
 p {
     font-family: 'Bitter';
     font-size: 16px;
@@ -99,7 +109,7 @@ code {
 }
 
 div.date, div.authors {
-    font-size: 13px;
+    font-size: 15px;
     color: #777777
 }
 

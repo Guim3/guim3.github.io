@@ -9,6 +9,7 @@ body {
 
 img.resize{
     width:750px; /* you can use % */
+    max-width:80%;
     height: auto;
 }
 

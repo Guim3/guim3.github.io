@@ -114,7 +114,7 @@ code {
 	line-height: 22.5px;
 }
 
-div.date, div.authors {
+span.date, div.date, div.authors {
     font-size: 15px;
     margin-top: 0px;
     color: #777777
@@ -135,7 +135,7 @@ div.project_title {
     margin-bottom: 0px;
 }
 
-div.project_links{
+div.project_links, span.project_links {
     font-size: 18px;
     margin-top: 0px;
     margin-bottom: 10px;

@@ -80,13 +80,13 @@ h3 {
 	line-height: 25.6px;
 }
 
-h3.no_down_space {
+h3.no_down_space, h4.no_down_space {
     font-family: Bitter;
     font-size: 25px;
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
-    line-height: 10px;
+    line-height: 0px;
 }
 
 

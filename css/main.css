@@ -6,6 +6,12 @@ body {
     max-width:80%;
     line-height: 25.6px;
 }
+
+img.resize{
+    width:750px; /* you can use % */
+    height: auto;
+}
+
 nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;
@@ -111,6 +117,10 @@ code {
 div.date, div.authors {
     font-size: 15px;
     color: #777777
+}
+
+div.project_entry {
+    border-bottom: 1px solid #d5d5d5;
 }
 
 ul.posts { 

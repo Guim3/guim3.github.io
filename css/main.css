@@ -120,6 +120,12 @@ div.date, div.authors {
     color: #777777
 }
 
+div.project_title {
+    font-size: 25px;
+    line-height: 25.6px;
+    margin-bottom: 0px;
+}
+
 div.project_links{
     font-size: 18px;
     margin-top: 0px;

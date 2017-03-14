@@ -125,6 +125,10 @@ div.project_entry {
     border-bottom: 1px solid #d5d5d5;
 }
 
+div.project_entry_last {
+    margin-bottom: 25.6px;
+}
+
 div.project_title {
     font-size: 25px;
     line-height: 25.6px;

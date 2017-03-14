@@ -134,6 +134,7 @@ div.project_title {
 div.project_links{
     font-size: 18px;
     margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 ul.posts { 

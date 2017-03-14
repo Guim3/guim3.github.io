@@ -120,6 +120,11 @@ div.date, div.authors {
     color: #777777
 }
 
+div.project_entry {
+    margin-bottom: 25.6px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
 div.project_title {
     font-size: 25px;
     line-height: 25.6px;
@@ -129,10 +134,6 @@ div.project_title {
 div.project_links{
     font-size: 18px;
     margin-top: 0px;
-}
-
-div.project_entry {
-    border-bottom: 1px solid #d5d5d5;
 }
 
 ul.posts { 

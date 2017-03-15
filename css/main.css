@@ -149,3 +149,26 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+div.warn {
+  position: relative;
+  margin: 0 auto;
+  border: solid 1px darkred;
+  width: 20em; height: 4.5em;
+  border-radius: .2em;
+  background: linear-gradient(lightcoral, firebrick); 
+  color: #ffffff;
+}
+div.warn span.text {
+  margin-left: 10px;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+div.warn span.triangle {
+  margin-left: 10px;
+  font-size: 50px;
+  vertical-align: middle;
+}

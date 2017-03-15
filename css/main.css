@@ -151,8 +151,6 @@ ul.posts li {
 }
 
 div.warn {
-  position: relative;
-  margin: 0 auto;
   border: solid 1px darkred;
   width: 20em; height: 4.5em;
   border-radius: .2em;
@@ -161,7 +159,7 @@ div.warn {
 }
 div.warn span.text {
   margin-left: 10px;
-  font-family: Arial;
+  font-family: Bitter;
   font-size: 16px;
   font-weight: 700;
   vertical-align: middle;

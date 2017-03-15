@@ -152,7 +152,7 @@ ul.posts li {
 
 div.warn {
   border: solid 1px darkred;
-  width: 22.5em; height: 4.5em;
+  width: 21.5em; height: 4.5em;
   border-radius: .2em;
   background: linear-gradient(lightcoral, firebrick); 
   color: #ffffff;

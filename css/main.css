@@ -27,6 +27,10 @@ img.center {
     margin: 0 auto;
 }
 
+img.left {
+  float: left
+}
+
 nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;

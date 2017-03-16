@@ -27,8 +27,20 @@ img.center {
     margin: 0 auto;
 }
 
-img.left {
-  float: left
+
+div.home_intro {
+    font-size: 21px;
+}
+
+.home_content {
+  padding: 0 0 0 200px; /* 175px being the width of the image + how much space you want to put between it and your text */
+  position: relative; /* So the imageis relative to this */
+}
+
+.home_content img {
+  left: 0;
+  position: absolute;
+  top 0;
 }
 
 nav ul {
@@ -38,10 +50,6 @@ nav ul {
     font-size: 25px;
     font-weight: bold;
     /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
-}
-
-div.intro {
-    font-size: 21px;
 }
 
 footer {

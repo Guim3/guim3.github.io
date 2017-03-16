@@ -12,6 +12,16 @@ img {
     height: auto;
 }
 
+img.circular {
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
 nav ul {
     font-family: Bitter;/*Monaco, Menlo, Consolas;*/
     padding: 0px;

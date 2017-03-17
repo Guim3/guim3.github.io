@@ -22,9 +22,11 @@ img.circular {
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 
-img.center {
-    display: block;
+
+.center-image /*![Picture description](/link/to/picture.jpg){: .center-image }*/
+{
     margin: 0 auto;
+    display: block;
 }
 
 h1.post_title{
@@ -129,7 +131,7 @@ p {
     line-height: 25.6px;
     color: #333;
 }
-blockquote p{
+blockquote, blockquote p{
 	font-family: Bitter;
 	font-size: 16px;
 	font-style: italic;

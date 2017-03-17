@@ -149,9 +149,16 @@ code {
 	line-height: 22.5px;
 }
 
-span.date, div.date, div.authors, div.img-caption{
+span.date, div.date, div.authors{
     font-size: 15px;
     margin-top: 0px;
+    color: #777777
+}
+
+p.img-caption{
+    font-size: 15px;
+    margin-top: 0px;
+    text-align: center;
     color: #777777
 }
 

@@ -28,12 +28,14 @@ If you are reading this, chances are that you have heard GANs are pretty promisi
 
 I personally think that GANs have a huge potential but we still need have a lot to figure out until we can reach to reach that point.
 
+{: img.center}
 ![All aboard the GAN train](https://cdn.meme.am/instances/500x/48663315.jpg){:height="auto" width="45%"}
 
 In any case, what are GANs? I'm going to describe them very briefly. In case you are not familiar about them and want to know more details, there are a lot of great sites with good explanations. As a personal recommendation, I like the ones from [Eric Jang][introGAN1] and [Brandon Amos][introGAN2].
 
 So, GANs — originally proposed by Ian Goodfellow — have two networks, a generator and a discriminator. They are both trained at the same time and compete again each other in a minimax game. The generator is trained to fool the discriminator creating realistic images, and the discriminator is trained not to be fooled by the generator.
 
+{: img.center}
 ![GAN training overview]({{site.baseurl}}/files/blog/All-you-need-to-know-about-GANs/GAN_training_overview.jpg)
 
 At first, the generator generates images. It does that by sampling a vector noise Z from a simple distribution (e.g. normal), and then upsampling this vector up to an image. In the first iterations, these images will look very noisy. 

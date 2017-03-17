@@ -1,7 +1,7 @@
 ---
 layout: post
 title: All you need to know about GANs
-date: 2017-03-17T00:00:00.000Z
+date: 2017-03-17
 published: true
 ---
 
@@ -10,7 +10,7 @@ Have you ever wanted to know about Generative Adversarial Networks (GANs)? Maybe
 #### What this post is not about
 First things first, this is what you __won't__ find in this post:
 
-* A tutorial about GANs? TODO
+* A tutorial about GANs? @REVIEW
 * Complex technical explanations
 * Code (not explicitly: there are links to code for those interested)
 * An exhaustive research list (you can already find it [here][GANpapers])
@@ -22,11 +22,14 @@ First things first, this is what you __won't__ find in this post:
 
 ## Understanding GANs
 
+If you are familiar with GANs you can probably [skip](test) this section. [Face dataset: CelebA](#11-train-with-a-face-dataset-celeba)
+{: .date}
+
 If you are reading this, chances are that you have heard GANs are pretty promising. Is the hype justified? This is what Yann LeCun, director of Facebook AI, thinks:
 
 > "Generative Adversarial Networks is the most interesting idea in the last ten years in machine learning."
 
-I personally think that GANs have a huge potential but we still need have a lot to figure out until we can reach to reach that point.
+I personally think that GANs have a huge potential but we still need have a lot to figure out until we can reach that point.
 
 ![All aboard the GAN train](https://cdn.meme.am/instances/500x/48663315.jpg){:height="auto" width="45%" .center-image}
 
@@ -43,19 +46,32 @@ Then, the discriminator is given fake and real images, and learns to distinguish
 
 It is worth mentioning that due to the minimax optimization used in GANs, the training might be quite unstable. There are some [hacks][GANhacks], though, that you can use for a more robust training.
 
+This is as an example of how generated face images progressively become more real:
 
+<iframe width="415" height="415" src="https://www.youtube.com/embed/fN3egtFdA7s?autoplay=0&loop=1&playlist=fN3egtFdA7s" frameborder="0" allowfullscreen></iframe>{: .center-image }
+Output of a GAN during its first two epochs. Dataset used is [CelebA][CelebA].
+{: .img-caption}
 
 ### Code
 
-If you are interested in the implementation of GANs, here are a bunch of links to short and simple codes:
+If you are interested in basic implementations of GANs, here are a bunch of links to short and simple codes:
 
-* Tensorflow
-* Torch and Python
-* Torch and Lua
+* [Tensorflow][GAN_tensorflow]
+* Torch and Python (PyTorch): [[code]][GAN_pytorch_code] [[blog post]][GAN_pytorch_blog]
+* [Torch and Lua][GAN_torch]
 
-This is not the state-of-the-art code, but it is easy enough to understand the idea. If you are looking for the best implementation to make your own stuff, take a look at [this later section][TODO].
+These are not the state-of-the-art, but they are good to grasp the idea. If you are looking for the best implementation to make your own stuff, take a look at [this later section](TODO).
+
+## <a name="test"></a> Next section
 
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
 [introGAN1]: http://blog.evjang.com/2016/06/generative-adversarial-nets-in.html
 [introGAN2]: https://bamos.github.io/2016/08/09/deep-completion/#ml-heavy-generative-adversarial-net-gan-building-blocks
-[GANhacks]: https://github.com/soumith/ganhacks#authors
+[GANhacks]: https://github.com/soumith/ganhacks
+[GANresults]: https://youtu.be/fN3egtFdA7s
+[CelebA]: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+[GAN_tensorflow]: https://github.com/ericjang/genadv_tutorial/blob/master/genadv1.ipynb
+[GAN_pytorch_code]: https://github.com/devnag/pytorch-generative-adversarial-networks
+[GAN_pytorch_blog]: https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f
+[GAN_torch]: https://github.com/lopezpaz/metal
+

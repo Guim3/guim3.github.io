@@ -35,7 +35,7 @@ In any case, what are GANs? I'm going to describe them very briefly. In case you
 So, GANs — originally proposed by Ian Goodfellow — have two networks, a generator and a discriminator. They are both trained at the same time and compete again each other in a minimax game. The generator is trained to fool the discriminator creating realistic images, and the discriminator is trained not to be fooled by the generator.
 
 ![GAN training overview]({{site.baseurl}}/files/blog/All-you-need-to-know-about-GANs/GAN_training_overview.jpg){: .center-image }
-GAN training overview{: .img-caption}
+GAN training overview{: class="img-caption"}
 
 At first, the generator generates images. It does that by sampling a vector noise Z from a simple distribution (e.g. normal), and then upsampling this vector up to an image. In the first iterations, these images will look very noisy. 
 Then, the discriminator is given fake and real images, and learns to distinguish them. The generator then receives the "feedback" of the discriminator with backpropagation, becoming better at generating images. At the end, we want that the distribution of fake images is as close as possible to the distribution of real images. Or, in simple words, we want fake images to look as plausible as possible.

@@ -20,7 +20,7 @@ First things first, this is what you __won't__ find in this post:
 * A lot of links to other sites, posts and articles so you can decide where to focus on
 * Recent progress and potential future applications
 
-# Understanding GANs
+## Understanding GANs
 
 If you are reading this, chances are that you have heard GANs are pretty promising. Is the hype justified? This is what Yann LeCun, director of Facebook AI, thinks:
 

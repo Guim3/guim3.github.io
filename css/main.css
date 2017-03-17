@@ -129,9 +129,9 @@ p {
     line-height: 25.6px;
     color: #333;
 }
-blockquote {
+blockquote p{
 	font-family: Bitter;
-	font-size: 17px;
+	font-size: 16px;
 	font-style: italic;
 	font-variant: normal;
 	font-weight: 400;

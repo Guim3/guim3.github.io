@@ -1,6 +1,6 @@
 ---
 layout: post
-title: All you need to know about GANs
+title: Fantastic GANs and where to find them
 date: 2017-03-17
 published: true
 ---
@@ -18,7 +18,7 @@ First things first, this is what you __won't__ find in this post:
 #### What this post is about
 * A summary of the important things about GANs
 * A lot of links to other sites, posts and articles so you can decide where to focus on
-* Recent progress and potential future applications
+* Being up to date
 
 ## Understanding GANs
 
@@ -70,7 +70,7 @@ Here I'm going to describe in roughly chronological order all the advances and t
 
 ### <a name="conditional-gans"></a> Conditional GANs
 
-**TL;DR:** GANs that use label information. This results in better quality images and being able to control -- to an extent -- how generated images will look.
+**TL;DR:** these GANs that use extra label information. This results in better quality images and being able to control -- to an extent -- how generated images will look.
 
 Conditional GANs are an extension of the GAN framework. Here we have conditional information Y that describes some aspect of the data. For example, if we are dealing with faces, Y could describe attributes such as hair color and gender. Then, this attribute information is inserted in both the generator and the discriminator.
 
@@ -91,13 +91,13 @@ Differences between Z and Y on MNIST samples. Z is fixed on rows and Y on column
 
 There are lots of interesting articles on the subject. Among them, I highlight these two:
 
-* Learning what and where to draw [[article]][Reed_art] [[code]][Reed_code]: in this paper, the authors propose a mechanism to tell (via text descriptions) the GAN not only how you would like the content of the image to be (what), but also the position of the element via bounding boxes / landmarks. Have a look at the results: 
+* __Learning what and where to draw__ [[article]][Reed_art] [[code]][Reed_code]: in this paper, the authors propose a mechanism to tell (via text descriptions) the GAN not only how you would like the content of the image to be (what), but also the position of the element via bounding boxes / landmarks. Have a look at the results: 
 
 ![Learning what and where to draw figure]({{site.baseurl}}/files/blog/All-you-need-to-know-about-GANs/Reed_figure.jpg){: .center-image }
 
-* StackGAN [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generate high quality images. See by yourself:
+* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generate high quality images. See by yourself:
 
-![Samples from StackGAN]({{site.baseurl}}/files/blog/All-you-need-to-know-about-GANs/StackGAN_samples.jpg){: .center-image }
+![Samples from StackGAN]({{site.baseurl}}/files/blog/All-you-need-to-know-about-GANs/StackGAN_samples.jpg){: :height="auto" width="40%" .center-image }
 
 #### You might want to use conditional GANs if
 

@@ -29,10 +29,6 @@ img.circular {
     display: block;
 }
 
-h1.post_title{
-  margin-bottom: 0px;
-}
-
 div.home_intro {
     font-size: 21px;
 }
@@ -105,12 +101,8 @@ h1 {
 	font-weight: 700;
 	line-height: 78px;
 }
-div.post-title{
-  font-family: Bitter;
-  font-size: 40px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 700;
+h1.post_title{
+  margin-bottom: 0px;
   line-height: 15px;
 }
 h2 {

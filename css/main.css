@@ -13,8 +13,8 @@ img {
 }
 
 img.face {
-    width:150px;
-    height:150px;
+    width:175px;
+    height:175px;
 }
 
 img.circular {
@@ -134,7 +134,7 @@ p {
 blockquote, blockquote p{
 	font-family: Bitter;
 	font-size: 16px;
-	font-style: italic;
+	font-style: normal; /*italic;*/
 	font-variant: normal;
 	font-weight: 400;
 	line-height: 20px;

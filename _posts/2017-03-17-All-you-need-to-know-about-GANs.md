@@ -22,7 +22,7 @@ First things first, this is what you __won't__ find in this post:
 
 ## Understanding GANs
 
-If you are familiar with GANs you can probably [skip](gans-evolution) this section. [Face dataset: CelebA](#11-train-with-a-face-dataset-celeba)
+If you are familiar with GANs you can probably [skip](#gans-evolution) this section.
 {: .date}
 
 @REVIEW
@@ -68,7 +68,7 @@ These are not the state-of-the-art, but they are good to grasp the idea. If you 
 
 Here I'm going to describe in roughly chronological order all the advances and types of GANs that have been showing up over these last years.
 
-### <a name="test"></a> Conditional GANs
+### <a name="conditional-gans"></a> Conditional GANs
 
 **TL;DR:** GANs that use label information. This results in better quality images and being able to control -- to an extent -- how generated images will look.
 

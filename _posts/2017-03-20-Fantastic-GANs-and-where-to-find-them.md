@@ -167,7 +167,7 @@ GANs have always had the convergence problem, so you don't really know when to s
 
 For example, see these two uninformative loss functions plots of a DCGAN perfectly able to generate [MNIST][MNIST] samples:
 
-![Uninformative loss functions]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/crazy_loss_function.jpg){: :height="auto" width="550px" .center-image }
+![Uninformative loss functions]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/crazy_loss_function.jpg){: :height="auto" width="610px" .center-image }
 Do you know when to stop training just by looking at this figure? Me neither!
 {: .img-caption}
 
@@ -175,7 +175,7 @@ This interpretability issue is one of the problems that Wasserstein GANs solves.
 
 As a result, WassGAN has a loss function that correlates with image quality and converges. It is also more stable, meaning that it is not as dependant on the architecture. For example, it works quite well even if you remove batch normalization or try weird architectures.
 
-![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Wass_loss_function.jpg){: :height="auto" .center-image }
+![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/WassGAN_loss_function.jpg){: :height="auto" .center-image }
 This is the plot of the WassGAN loss function. The lower the loss, the higher the image quality. Neat!
 {: .img-caption}
 
@@ -194,6 +194,7 @@ So, that's all for now! I know that there is still more interesting research to 
 * [Adding an encoder to][ALI] [GANs to reconstruct samples][AFL]
 * [Image-to-image translation][pix2pix]
 * [Interactive image generation][iGAN]
+* [Increase image quality with GANs][GAN_img_qual]
 
 For an extensive research list, check this [list][GANpapers].
 
@@ -230,3 +231,4 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [inpGAN]: https://bamos.github.io/2016/08/09/deep-completion/
 [pix2pix]: https://phillipi.github.io/pix2pix/
 [iGAN]: https://github.com/junyanz/iGAN
+[GAN_img_qual]: https://arxiv.org/abs/1609.04802

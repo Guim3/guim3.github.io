@@ -134,19 +134,19 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 One of the main problems related to GANs is their convergence. It is not guaranteed and despite the refinement over the architecture, the training can be quite unstable. In this paper, the authors propose different enhancements on the training of GANs. Here are some of them:
 
-1. **Feature matching**: instead of having the generator trying to fool the discrimintor as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
-2. **Historical averaging**: when updating the parameters, also take into account their past values.
-3. **One-sided label smoothing**: this one is pretty easy: simply make your discriminator target output from [0=fake image, 1=real image] to [0=fake image, 0.9=real image]. Yeah, this improves the training.
-4. Virtual batch normalization: avoid dependency of data on the same batch by using statistics collected on a reference batch. Computationally expensive, so only used on generator net.
+* **Feature matching**: instead of having the generator trying to fool the discrimintor as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
+* **Historical averaging**: when updating the parameters, also take into account their past values.
+* **One-sided label smoothing**: this one is pretty easy: simply make your discriminator target output from [0=fake image, 1=real image] to [0=fake image, 0.9=real image]. Yeah, this improves the training.
+* **Virtual batch normalization**: avoid dependency of data on the same batch by using statistics collected on a reference batch. Computationally expensive, so only used on generator net.
 
 Using all these techniques allow the model to be better at generating high resolution images, which is the Achilles heel of GANs. As a comparison, see the difference between the original DCGAN and the improved DCGAN on 128x128 images:
 
-![DCGAN vs improved DCGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/improved_DCGAN_comparison.jpg){: :height="auto" width="780px" .center-image }
+![DCGAN vs improved DCGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/improved_DCGAN_comparison.jpg){: :height="auto" width="620px" .center-image }
 
 These are supposed to be dog images. As you can see, DCGAN fails to represent them, while with improved DCGAN you could at least see that there is some doggy thing going on. This also shows another of the limitations of GANs, that is, generating structured content.
 
 #### You might want to use improved DCGANs if
-* you want higher quality and higher resolution images compared to DCGANs.
+* if you want an improved version of the DCGAN (I'm sure you weren't expecting that) able to generate better higher resolution images.
 
 ### <a name="infogans"></a> InfoGANs
 

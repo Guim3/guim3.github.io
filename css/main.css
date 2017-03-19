@@ -35,7 +35,8 @@ div.home_intro {
 
 .home_content {
   position: relative; /* So the image is relative to this */
-  margin-bottom: 25px; /*Add distance to footer*/
+  margin-top: 55px; /*Add distance to headings*/
+  margin-bottom: 55px; /*Add distance to footer*/
 }
 
 .home_content img {

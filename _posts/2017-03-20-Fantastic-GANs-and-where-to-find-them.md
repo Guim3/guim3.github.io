@@ -153,7 +153,36 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 ### <a name="infogans"></a> InfoGANs
 
 
-### <a name="wassgans"></a> Wassertein GANs
+### <a name="wassgans"></a> Wasserstein GANs
+
+**TL;DR:** Change the loss function to use the Wasserstein distance. As a result, WassGANs have loss functions that correlate with image quality. Also, training stability improves and is not as dependent on the architecture.
+
+[[Article]][WasGAN]
+
+GANs have always had the convergence problem, so you don't really know when to stop training a GAN. So, one would simply know by visually inspecting the generated samples. In other words, the loss function doesn't correlate with image quality. This is a big headache because:
+
+	* you need to be constantly looking at the samples to tell whether you model is training correctly or not.
+	* you don't know when to stop training (no convergence).
+	* you don't have a numerical value that tells you how well are you tuning the parameters. 
+
+For example, see these two uninformative loss functions plots of a DCGAN perfectly able to generate [MNIST][MNIST] samples:
+
+![Uninformative loss functions]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/crazy_loss_function.jpg){: :height="auto" width="550px" .center-image }
+Do you know when to stop training just by looking at this figure? Me neither!
+{: .img-caption}
+
+This interpretability issue is one of the problems that Wasserstein GANs solves. How? GANs can be interpreted to minimize the Jensen-Shannon divergence, which is 0 if the real and fake distribution don't overlap (which is usually the case). So, instead of minimizing the JS divergence, the authors use the Wasserstein distance, which describes the distance between the "points" from one distribution to the other. This is the main idea, but if you would like to know more, I highly recommend visiting this [link][WasGANdropbox] for a more in-depth analysis or reading the article itself. 
+
+As a result, WassGAN has a loss function that correlates with image quality and converges. It is also more stable, meaning that it is not as dependant on the architecture. For example, it works quite well even if you remove batch normalization or try weird architectures.
+
+![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Wass_loss_function.jpg){: :height="auto" .center-image }
+This is the plot of the WassGAN loss function. The lower the loss, the higher the image quality. Neat!
+{: .img-caption}
+
+#### You might want to use Wasserstein GANs if
+
+* you are looking for a state-of-the-art GAN with the highest training stability.
+* you want an informative and interpretable loss function.
 
 ---
 
@@ -190,6 +219,9 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [Reed_code]: https://github.com/reedscot/nips2016
 [StackGAN_art]: https://arxiv.org/abs/1612.03242
 [StackGAN_code]: https://github.com/hanzhanggit/StackGAN
+[MNIST]: http://yann.lecun.com/exdb/mnist/
+[WasGAN]: https://arxiv.org/abs/1701.07875
+[WasGANdropbox]: https://paper.dropbox.com/doc/Wasserstein-GAN-GvU0p2V9ThzdwY3BbhoP7
 [impGAN]: https://arxiv.org/abs/1606.03498
 [videoGANs]: http://web.mit.edu/vondrick/tinyvideo/
 [ALI]: https://ishmaelbelghazi.github.io/ALI/

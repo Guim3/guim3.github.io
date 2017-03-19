@@ -78,16 +78,16 @@ The authors of the DCGAN focused on the architecture of the original GAN and man
 * Batch normalization is a must in both networks.
 * Fully hidden connected layers are not a good idea.
 * Avoid pooling, simply stride your convolutions!
-* ReLU activations are your friend (almost all the time).
+* ReLU activations are your friend (*almost* always).
 
-DCGANs are also relevant because they have become one of the main baselines to implement and test GANs. Shortly after the publication of this paper, there were different accessible implementations in [Theano][DCGAN_theano], [Torch][DCGAN_th], [Tensorflow][DCGAN_tf] and [Chainer][DCGAN_chainer] available to test with whatever dataset you can think of. So, if you come across a  [creepy](https://github.com/mattya/chainer-DCGAN) [generated](https://www.youtube.com/watch?v=rs3aI7bACGc) [datasets](http://www.aux.tv/wp-content/uploads/2016/01/Screen-Shot-2016-01-19-at-11.39.13-AM.png) you can totally blame the authors of DCGAN for it.
+DCGANs are also relevant because they have become one of the main baselines to implement and use GANs. Shortly after the publication of this paper, there were different accessible implementations in [Theano][DCGAN_theano], [Torch][DCGAN_th], [Tensorflow][DCGAN_tf] and [Chainer][DCGAN_chainer] available to test with whatever dataset you can think of. So, if you come across a  [creepy](https://github.com/mattya/chainer-DCGAN) [generated](https://www.youtube.com/watch?v=rs3aI7bACGc) [datasets](http://www.aux.tv/wp-content/uploads/2016/01/Screen-Shot-2016-01-19-at-11.39.13-AM.png) you can totally blame the authors of DCGAN for it.
 
 #### You might want to use DCGANs if
 
 * You want something better than vanilla GANs (that is, always). Vanilla GANs could work on simple datasets, but DCGANs are far better. 
-* You are looking for a strong baseline to compare with your fancy new state-of-the-art GAN algorithm.
+* You are looking for a solid baseline to compare with your fancy new state-of-the-art GAN algorithm.
 
-From this point, all the types of GANs that I'm going to describe will be assumed to have a DCGAN architecture, unless the opposite is specified.
+From this point on, all the types of GANs that I'm going to describe will be assumed to have a DCGAN architecture, unless the opposite is specified.
 
 ### <a name="cgans"></a> Conditional GANs (cGANs)
 
@@ -127,9 +127,26 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 * you have a labeled training set and want to improve the quality of the generated images.
 * you would like to have explicit control over certain aspects of the images (e.g. I want to generate a red bird of this size in this specific position).
 
-### <a name="improvedgans"></a> Improved GANs
-**TL;DR:** A series of techniques that improve the previous baseline (DCGANs). For example, these improved GANs allow to generate better high resolution images.
+### <a name="improvedgans"></a> Improved DCGANs
+**TL;DR:** A series of techniques that improve the previous DCGAN. For example, this improved baseline allow to generate better high resolution images.
 
+[[Article]][impGAN]
+
+One of the main problems related to GANs is their convergence. It is not guaranteed and despite the refinement over the architecture, the training can be quite unstable. In this paper, the authors propose different enhancements on the training of GANs. Here are some of them:
+
+1. **Feature matching**: instead of having the generator trying to fool the discrimintor as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
+2. **Historical averaging**: when updating the parameters, also take into account their past values.
+3. **One-sided label smoothing**: this one is pretty easy: simply make your discriminator target output from [0=fake image, 1=real image] to [0=fake image, 0.9=real image]. Yeah, this improves the training.
+4. Virtual batch normalization: avoid dependency of data on the same batch by using statistics collected on a reference batch. Computationally expensive, so only used on generator net.
+
+Using all these techniques allow the model to be better at generating high resolution images, which is the Achilles heel of GANs. As a comparison, see the difference between the original DCGAN and the improved DCGAN on 128x128 images:
+
+![DCGAN vs improved DCGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/improved_DCGAN_comparison.jpg){: :height="auto" width="780px" .center-image }
+
+These are supposed to be dog images. As you can see, DCGAN fails to represent them, while with improved DCGAN you could at least see that there is some doggy thing going on. This also shows another of the limitations of GANs, that is, generating structured content.
+
+#### You might want to use improved DCGANs if
+* you want higher quality and higher resolution images compared to DCGANs.
 
 ### <a name="infogans"></a> InfoGANs
 
@@ -138,7 +155,7 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 ---
 
-So, that's all for now! I know that there is still more interesting research to comment, but in this post I wanted to focus on a limited set of cool stuff. Just to name a few, here is a short list of things that I have not commented, in case you want to check them out:
+So, that's all for now! I know that there is still more interesting research to comment, but in this post I decided to focus on a limited set of cool stuff. Just to name a few, here is a short list of things that I have not commented, in case you want to check them out:
 
 * [GANs applied on videos][videoGANs]
 * [Image completion][inpGAN]
@@ -171,6 +188,7 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [Reed_code]: https://github.com/reedscot/nips2016
 [StackGAN_art]: https://arxiv.org/abs/1612.03242
 [StackGAN_code]: https://github.com/hanzhanggit/StackGAN
+[impGAN]: https://arxiv.org/abs/1606.03498
 [videoGANs]: http://web.mit.edu/vondrick/tinyvideo/
 [ALI]: https://ishmaelbelghazi.github.io/ALI/
 [AFL]: https://arxiv.org/abs/1605.09782

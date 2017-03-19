@@ -151,7 +151,38 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 * you would like to have explicit control over certain aspects of the images (e.g. I want to generate a red bird of this size in this specific position).
 
 ### <a name="infogans"></a> InfoGANs
+**TL;DR:** GANs that are able to encode meaningful image features on part of the noise vector Z in an unsupervised manner. For example, encode the rotation of a digit.
 
+[[Article]][infoGAN]
+
+Have you ever wondered what kind of information does the input noise Z encode in a GAN? It usually encodes different types of features of the images in a very "noisy" way. For example, you could take one position of this Z vector, and change its values from -1 and 1. This is what you would see on a model trained on MNIST digit dataset:
+
+![Interpolations on Z]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Z_interpolation.jpg){: :height="auto" .center-image }
+Interpolation on Z. First image has one of the positions at -1, and it gets interpolated to 1 at the last image.
+{: .img-caption}
+
+It seems to me a kind of 4 slowly transformed to a "Y" (most likely, a fusion between a 4 and a 9). So, this is what I was referring to by encoding this information in a noisy manner: one single position of Z is a parameter of more than one feature of the image. In this case, this position changed the digit itself (from 4 to 9, sort of) and the style (from bold to italic). Then, you could not define any exact meaning to that position of Z.
+
+What if we could have some of the positions of Z to represent unique and constrained information, just as the conditional information Y in cGAN does? What if the first position was a value between 0 and 9 that controlled the number of the digit, and the second position controlled their rotation? This is what the authors propose in their article. The interesting part is that, unlike cGANs, they achieve this in an unsupervised approach, without label information.
+
+This is how they do it. They take Z vector and split it in two parts: C and Z. 
+
+* C will encode the semantic features of the data distribution.
+* Z will encode all the unstructured noise of this distribution.
+
+How do they force C to encode these features? They change the loss function, otherwise the GAN could learn to simply ignore C. So, they apply an information-theoretic regularization which ensures a high mutual information between C and the generator distribution. In other words, if C changes it forces the generated images to change, too. As a result, you can't explicitly control what type of information will be encoded in C, but each position of C should have a unique meaning. See some visual examples:
+
+![infoGAN_example]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/infoGAN_example.jpg){: :height="auto" .center-image }
+The first position of C encodes the digit class, while the 2nd position encodes the rotation.
+{: .img-caption}
+
+However, there's a price to pay for not using label information. The limitation here is that these encodings only work with fairly simple datasets, such as the MNIST dataset. Moreover, you still need to "hand-craft" each position of C. In the article, for example, they need to specify that the 1st position of C is an integer between 0 and 9 so it fits with the 10 digit classes on the dataset. So, you might consider this not to be 100% unsupervised, as you might need to give some minor details to the model.
+
+#### You might want to use infoGANs if
+
+* your dataset is not very complex.
+* you would like to train a cGAN but you don't have label information.
+* you want to see what are the main meaningful image features of your dataset.
 
 ### <a name="wassgans"></a> Wasserstein GANs
 
@@ -161,9 +192,9 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 GANs have always had the convergence problem, so you don't really know when to stop training a GAN. So, one would simply know by visually inspecting the generated samples. In other words, the loss function doesn't correlate with image quality. This is a big headache because:
 
-	* you need to be constantly looking at the samples to tell whether you model is training correctly or not.
-	* you don't know when to stop training (no convergence).
-	* you don't have a numerical value that tells you how well are you tuning the parameters. 
+* you need to be constantly looking at the samples to tell whether you model is training correctly or not.
+* you don't know when to stop training (no convergence).
+* you don't have a numerical value that tells you how well are you tuning the parameters. 
 
 For example, see these two uninformative loss functions plots of a DCGAN perfectly able to generate [MNIST][MNIST] samples:
 
@@ -175,7 +206,7 @@ This interpretability issue is one of the problems that Wasserstein GANs solves.
 
 As a result, WassGAN has a loss function that correlates with image quality and converges. It is also more stable, meaning that it is not as dependant on the architecture. For example, it works quite well even if you remove batch normalization or try weird architectures.
 
-![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/WassGAN_loss_function.jpg){: :height="auto" .center-image }
+![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/WassGAN_loss_function.jpg){: :height="auto" width="580px" .center-image }
 This is the plot of the WassGAN loss function. The lower the loss, the higher the image quality. Neat!
 {: .img-caption}
 
@@ -186,7 +217,7 @@ This is the plot of the WassGAN loss function. The lower the loss, the higher th
 
 ---
 
-So, that's all for now! I know that there is still more interesting research to comment, but in this post I decided to focus on a limited set of cool stuff. Just to name a few, here is a short list of things that I have not commented, in case you want to check them out:
+So, that's all for now! I know that there is still more interesting research to comment, but in this post I decided to focus on a limited set of cool stuff. Just to name a few, here is a short list of articles that I have not commented, in case you want to check them out:
 
 * [GANs applied on videos][videoGANs]
 * [Image completion][inpGAN]
@@ -221,6 +252,7 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [StackGAN_art]: https://arxiv.org/abs/1612.03242
 [StackGAN_code]: https://github.com/hanzhanggit/StackGAN
 [MNIST]: http://yann.lecun.com/exdb/mnist/
+[infoGAN]: https://arxiv.org/abs/1606.03657
 [WasGAN]: https://arxiv.org/abs/1701.07875
 [WasGANdropbox]: https://paper.dropbox.com/doc/Wasserstein-GAN-GvU0p2V9ThzdwY3BbhoP7
 [impGAN]: https://arxiv.org/abs/1606.03498

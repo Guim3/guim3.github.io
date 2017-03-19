@@ -34,15 +34,18 @@ div.home_intro {
 }
 
 .home_content {
-  padding: 0 0 30px 200px; /* 200px being the width of the image + how much space you want to put between it and your text */
-  /*30px is the bottom padding to prevent the footer to be too much above, as the actual text height is lower than the image height.*/
-  position: relative; /* So the imageis relative to this */
+  position: relative; /* So the image is relative to this */
 }
 
 .home_content img {
-  left: 0;
-  position: absolute;
-  top 0;
+  /*Very useful: https://css-tricks.com/centering-css-complete-guide/*/
+  position: absolute;  
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.home_content .home_text {
+  margin-left: 225px;
 }
 
 nav ul {
@@ -86,20 +89,20 @@ li {
 }
 
 name_heading {
-	font-family: Bitter;
-	font-size: 49px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 700;
-	line-height: 98px;
+  font-family: Bitter;
+  font-size: 49px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 98px;
 }
 h1 {
-	font-family: Bitter;
-	font-size: 40px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 700;
-	line-height: 78px;
+  font-family: Bitter;
+  font-size: 40px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 78px;
 }
 h1.post_title{
   margin-bottom: 0px;
@@ -114,12 +117,12 @@ h2 {
   line-height: 25.6px;
 }
 h3 {
-	font-family: Bitter;
-	font-size: 22px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 700;
-	line-height: 25.6px;
+  font-family: Bitter;
+  font-size: 22px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 25.6px;
 }
 
 h4 {
@@ -140,21 +143,21 @@ p {
     color: #333;
 }
 blockquote, blockquote p{
-	font-family: Bitter;
-	font-size: 16px;
-	font-style: normal; /*italic;*/
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 20px;
+  font-family: Bitter;
+  font-size: 16px;
+  font-style: normal; /*italic;*/
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
   color: #777777
 }
 code {
-	font-family: Consolas;
-	font-size: 15px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 100;
-	line-height: 22.5px;
+  font-family: Consolas;
+  font-size: 15px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+  line-height: 22.5px;
 }
 
 span.date, div.date, div.authors{

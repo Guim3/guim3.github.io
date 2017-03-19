@@ -71,7 +71,7 @@ Here I'm going to describe in roughly chronological order all the advances and t
 ### <a name="dcgans"></a>Deep Convolutional GANs (DCGANs)
 **TL;DR:** DCGANs were the first major improvement on the GAN architecture. They had a more stable training and higher quality samples. 
 
-[[Original article]](DCGAN_art)
+[[Article]](DCGAN_art)
 
 The authors of the DCGAN focused on the architecture of the original GAN and managed to improve it. I presume they had to spend quite a long time doing the most exciting thing about deep learning: try a lot of parameters! Yay! At the end, it totally paid off. Among other things, they found out that:
 
@@ -84,8 +84,10 @@ DCGANs are also relevant because they have become one of the main baselines to i
 
 #### You might want to use DCGANs if
 
-* You want decent quality samples (depending on the dataset). Vanilla GANs could work on simple datasets, but they are not as good as DCGANs. 
+* You want something better than vanilla GANs (that is, always). Vanilla GANs could work on simple datasets, but DCGANs are far better. 
 * You are looking for a strong baseline to compare with your fancy new state-of-the-art GAN algorithm.
+
+From this point, all the types of GANs that I'm going to describe will be assumed to have a DCGAN architecture, unless the opposite is specified.
 
 ### <a name="cgans"></a> Conditional GANs (cGANs)
 
@@ -116,7 +118,7 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 ![Learning what and where to draw figure]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Reed_figure.jpg){: .center-image }
 
-* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generate high quality images. See by yourself:
+* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generating high quality images. See by yourself:
 
 ![Samples from StackGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/StackGAN_samples.jpg){: :height="auto" width="490px" .center-image }
 
@@ -125,11 +127,29 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 * you have a labeled training set and want to improve the quality of the generated images.
 * you would like to have explicit control over certain aspects of the images (e.g. I want to generate a red bird of this size in this specific position).
 
-### <a name="test"></a> InfoGANs
+### <a name="improvedgans"></a> Improved GANs
+**TL;DR:** A series of techniques that improve the previous baseline (DCGANs). For example, these improved GANs allow to generate better high resolution images.
 
-### <a name="test"></a> Wassertein GANs
 
-Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know at the comment section below. Feel free also to ask me or to comment any other thing!
+### <a name="infogans"></a> InfoGANs
+
+
+### <a name="wassgans"></a> Wassertein GANs
+
+---
+
+So, that's all for now! I know that there is still more interesting research to comment, but in this post I wanted to focus on a limited set of cool stuff. Just to name a few, here is a short list of things that I have not commented, in case you want to check them out:
+
+* [GANs applied on videos][videoGANs]
+* [Image completion][inpGAN]
+* [GAN + Variational AutoEncoder hybrid][VAE+GAN]
+* [Adding an encoder to][ALI] [GANs to reconstruct samples][AFL]
+* [Image-to-image translation][pix2pix]
+* [Interactive image generation][iGAN]
+
+For an extensive research list, check this [list][GANpapers].
+
+Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know at the comment section below. Feel free also to ask me or comment anything!
 
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
 [introGAN1]: http://blog.evjang.com/2016/06/generative-adversarial-nets-in.html
@@ -151,4 +171,10 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [Reed_code]: https://github.com/reedscot/nips2016
 [StackGAN_art]: https://arxiv.org/abs/1612.03242
 [StackGAN_code]: https://github.com/hanzhanggit/StackGAN
-
+[videoGANs]: http://web.mit.edu/vondrick/tinyvideo/
+[ALI]: https://ishmaelbelghazi.github.io/ALI/
+[AFL]: https://arxiv.org/abs/1605.09782
+[VAE+GAN]: https://arxiv.org/abs/1512.09300
+[inpGAN]: https://bamos.github.io/2016/08/09/deep-completion/
+[pix2pix]: https://phillipi.github.io/pix2pix/
+[iGAN]: https://github.com/junyanz/iGAN

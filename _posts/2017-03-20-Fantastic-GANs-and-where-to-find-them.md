@@ -63,22 +63,21 @@ These are not state-of-the-art, but they are good to grasp the idea. If you are 
 
 ## <a name="gans-evolution"></a> GANs: the evolution
 
-Here I'm going to describe in roughly chronological order all the advances and types of GANs that have been showing up over these last years.
+Here I'm going to describe in roughly chronological order some of the relevant progresses and types of GANs that have been showing up over these last years.
 
 ### <a name="dcgans"></a>Deep Convolutional GANs (DCGANs)
-**TL;DR:** DCGANs were the first major improvement on the GAN architecture. They had a more stable training and higher quality samples. 
+**TL;DR:** DCGANs were the first major improvement on the GAN architecture. They are more stable in terms of training and generate higher quality samples. 
 
-[[Article]](DCGAN_art)
+[[Article]][DCGAN_art]
 
-The authors of the DCGAN focused on the architecture of the original GAN and managed to improve it. I presume they had to spend quite a long time doing the most exciting thing about deep learning: try a lot of parameters! Yay! At the end, it totally paid off. Among other things, they found out that:
+The authors of the DCGAN focused on improving the architecture of the original vanilla GAN. I presume they had to spend quite a long time doing the most exciting thing about deep learning: try a lot of parameters! Yay! At the end, it totally paid off. Among other things, they found out that:
 
 * Batch normalization is a must in both networks.
 * Fully hidden connected layers are not a good idea.
 * Avoid pooling, simply stride your convolutions!
 * ReLU activations are your friend (*almost* always).
 
-DCGANs are also relevant because they have become one of the main baselines to implement and use GANs. Shortly after the publication of this paper, there were different accessible implementations in [Theano][DCGAN_theano], [Torch][DCGAN_th], [Tensorflow][DCGAN_tf] and [Chainer][DCGAN_chainer] available to test with whatever dataset you can think of. So, if you come across a  [creepy](https://github.com/mattya/chainer-DCGAN) [generated](https://www.youtube.com/watch?v=rs3aI7bACGc) [datasets](http://www.aux.tv/wp-content/uploads/2016/01/Screen-Shot-2016-01-19-at-11.39.13-AM.png) you can totally blame the authors of DCGAN for it.
-
+DCGANs are also relevant because they have become one of the main baselines to implement and use GANs. Shortly after the publication of this paper, there were different accessible implementations in [Theano][DCGAN_theano], [Torch][DCGAN_th], [Tensorflow][DCGAN_tf] and [Chainer][DCGAN_chainer] available to test with whatever dataset you can think of. So, if you come across [strange](https://raw.githubusercontent.com/mattya/chainer-DCGAN/master/sample4.png) [generated](https://www.youtube.com/watch?v=rs3aI7bACGc) [datasets](http://www.aux.tv/wp-content/uploads/2016/01/Screen-Shot-2016-01-19-at-11.39.13-AM.png) you can totally blame these guys.
 #### You might want to use DCGANs if
 
 * You want something better than vanilla GANs (that is, always). Vanilla GANs could work on simple datasets, but DCGANs are far better. 
@@ -92,21 +91,21 @@ From this point on, all the types of GANs that I'm going to describe will be ass
 
 [[Article]][impGAN]
 
-One of the main problems related to GANs is their convergence. It is not guaranteed and despite the refinement over the architecture, the training can be quite unstable. In this paper, the authors propose different enhancements on the training of GANs. Here are some of them:
+One of the main problems related to GANs is their convergence. It is not guaranteed and despite the architecure refinement of the DCGAN, the training can still be quite unstable. In this paper, the authors propose different enhancements on the GAN training. Here are some of them:
 
-* **Feature matching**: instead of having the generator trying to fool the discriminator as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
+* **Feature matching**: instead of having the generator trying to fool the discriminator as much as possible, they propose a new objective function. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
 * **Historical averaging**: when updating the parameters, also take into account their past values.
 * **One-sided label smoothing**: this one is pretty easy: simply make your discriminator target output from [0=fake image, 1=real image] to [0=fake image, 0.9=real image]. Yeah, this improves the training.
-* **Virtual batch normalization**: avoid dependency of data on the same batch by using statistics collected on a reference batch. Computationally expensive, so only used on generator net.
+* **Virtual batch normalization**: avoid dependency of data on the same batch by using statistics collected on a reference batch. It is computationally expensive, so it's only used on the generator.
 
-Using all these techniques allow the model to be better at generating high resolution images, which is the Achilles heel of GANs. As a comparison, see the difference between the original DCGAN and the improved DCGAN on 128x128 images:
+All these techniques allow the model to be better at generating high resolution images, which is one of the weak points of GANs. As a comparison, see the difference between the original DCGAN and the improved DCGAN on 128x128 images:
 
 ![DCGAN vs improved DCGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/improved_DCGAN_comparison.jpg){: :height="auto" width="620px" .center-image }
 
-These are supposed to be dog images. As you can see, DCGAN fails to represent them, while with improved DCGAN you could at least see that there is some doggy thing going on. This also shows another of the limitations of GANs, that is, generating structured content.
+These are supposed to be dog images. As you can see, DCGAN fails to represent them, while with improved DCGAN you can at least see that there is some doggy thing going on. This also shows another of the limitations of GANs, that is, generating structured content.
 
 #### You might want to use improved DCGANs if
-* if you want an improved version of the DCGAN (I'm sure you weren't expecting that) able to generate better higher resolution images.
+* you want an improved version of the DCGAN (I'm sure you weren't expecting that :P) able to generate higher resolution images.
 
 
 ### <a name="cgans"></a> Conditional GANs (cGANs)

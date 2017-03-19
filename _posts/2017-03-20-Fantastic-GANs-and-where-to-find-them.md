@@ -59,7 +59,7 @@ If you are interested in a basic implementation of GANs, here are a bunch of lin
 * Torch and Python (PyTorch): [[code]][GAN_pytorch_code] [[blog post]][GAN_pytorch_blog]
 * [Torch and Lua][GAN_torch]
 
-These are not state-of-the-art, but they are good to grasp the idea. If you are looking for the best implementation to make your own stuff, take a look at [this later section](#wassgan).
+These are not state-of-the-art, but they are good to grasp the idea. If you are looking for the best implementation to make your own stuff, take a look at [this later section](#wassgans).
 
 ## <a name="gans-evolution"></a> GANs: the evolution
 

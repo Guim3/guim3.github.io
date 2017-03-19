@@ -73,6 +73,20 @@ Here I'm going to describe in roughly chronological order all the advances and t
 
 [[Original article]](DCGAN_art)
 
+The authors of the DCGAN focused on the architecture of the original GAN and managed to improve it. I presume they had to spend quite a long time doing the most exciting thing about deep learning: try a lot of parameters! Yay! At the end, it totally paid off. Among other things, they found out that:
+
+* Batch normalization is a must in both networks.
+* Fully hidden connected layers are not a good idea.
+* Avoid pooling, simply stride your convolutions!
+* ReLU activations are your friend (almost all the time).
+
+DCGANs are also relevant because they have become one of the main baselines to implement and test GANs. Shortly after the publication of this paper, there were different accessible implementations in [Theano][DCGAN_theano], [Torch][DCGAN_th], [Tensorflow][DCGAN_tf] and [Chainer][DCGAN_chainer] available to test with whatever dataset you can think of. So, if you come across a  [creepy](https://github.com/mattya/chainer-DCGAN) [generated](https://www.youtube.com/watch?v=rs3aI7bACGc) [datasets](http://www.aux.tv/wp-content/uploads/2016/01/Screen-Shot-2016-01-19-at-11.39.13-AM.png) you can totally blame the authors of DCGAN for it.
+
+#### You might want to use DCGANs if
+
+* You want decent quality samples (depending on the dataset). Vanilla GANs could work on simple datasets, but they are not as good as DCGANs. 
+* You are looking for a strong baseline to compare with your fancy new state-of-the-art GAN algorithm.
+
 ### <a name="cgans"></a> Conditional GANs (cGANs)
 
 **TL;DR:** these are GANs that use extra label information. This results in better quality images and being able to control -- to an extent -- how generated images will look.
@@ -124,6 +138,10 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [GANresults]: https://youtu.be/fN3egtFdA7s
 [CelebA]: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 [DCGAN_art]: https://arxiv.org/abs/1511.06434
+[DCGAN_theano]: https://github.com/Newmu/dcgan_code
+[DCGAN_tf]: https://github.com/carpedm20/DCGAN-tensorflow
+[DCGAN_th]: https://github.com/soumith/dcgan.torch
+[DCGAN_chainer]: https://github.com/mattya/chainer-DCGAN
 [cGAN_art]: https://arxiv.org/abs/1411.1784
 [GAN_tensorflow]: https://github.com/ericjang/genadv_tutorial/blob/master/genadv1.ipynb
 [GAN_pytorch_code]: https://github.com/devnag/pytorch-generative-adversarial-networks

@@ -5,7 +5,7 @@ date: 2017-03-17
 published: true
 ---
 
-Have you ever wanted to know about Generative Adversarial Networks (GANs)? Maybe you just want to be up to day on the topic? Or maybe you simply want to see how these networks have been refined over these last years. Well, in these cases, this post might interest you! 
+Have you ever wanted to know about Generative Adversarial Networks (GANs)? Maybe you just want to be up to date on the topic? Or maybe you simply want to see how these networks have been refined over these last years. Well, in these cases, this post might interest you! 
 
 #### What this post is not about
 First things first, this is what you __won't__ find in this post:
@@ -35,7 +35,7 @@ I personally think that GANs have a huge potential but we still need have a lot 
 ![All aboard the GAN train](https://cdn.meme.am/instances/500x/48663315.jpg){:height="auto" width="45%" .center-image}
 @END_REVIEW
 
-In any case, what are GANs? I'm going to describe them very briefly. In case you are not familiar about them and want to know more details, there are a lot of great sites with good explanations. As a personal recommendation, I like the ones from [Eric Jang][introGAN1] and [Brandon Amos][introGAN2].
+In any case, what are GANs? I'm going to describe them very briefly. In case you are not familiar with them and want to know more details, there are a lot of great sites with good explanations. As a personal recommendation, I like the ones from [Eric Jang][introGAN1] and [Brandon Amos][introGAN2].
 
 So, GANs — originally proposed by Ian Goodfellow — have two networks, a generator and a discriminator. They are both trained at the same time and compete again each other in a minimax game. The generator is trained to fool the discriminator creating realistic images, and the discriminator is trained not to be fooled by the generator.
 
@@ -43,8 +43,8 @@ So, GANs — originally proposed by Ian Goodfellow — have two networks, a gene
 GAN training overview.
 {: .img-caption}
 
-At first, the generator generates images. It does that by sampling a vector noise Z from a simple distribution (e.g. normal), and then upsampling this vector up to an image. In the first iterations, these images will look very noisy. 
-Then, the discriminator is given fake and real images, and learns to distinguish them. The generator then receives the "feedback" of the discriminator with backpropagation, becoming better at generating images. At the end, we want that the distribution of fake images is as close as possible to the distribution of real images. Or, in simple words, we want fake images to look as plausible as possible.
+At first, the generator generates images. It does that by sampling a vector noise Z from a simple distribution (e.g. normal) and then upsampling this vector up to an image. In the first iterations, these images will look very noisy. 
+Then, the discriminator is given fake and real images and learns to distinguish them. The generator then receives the "feedback" of the discriminator with backpropagation, becoming better at generating images. At the end, we want that the distribution of fake images is as close as possible to the distribution of real images. Or, in simple words, we want fake images to look as plausible as possible.
 
 It is worth mentioning that due to the minimax optimization used in GANs, the training might be quite unstable. There are some [hacks][GANhacks], though, that you can use for a more robust training.
 
@@ -91,13 +91,13 @@ From this point on, all the types of GANs that I'm going to describe will be ass
 
 
 ### <a name="improvedgans"></a> Improved DCGANs
-**TL;DR:** A series of techniques that improve the previous DCGAN. For example, this improved baseline allow to generate better high resolution images.
+**TL;DR:** A series of techniques that improve the previous DCGAN. For example, this improved baseline allow generating better high-resolution images.
 
 [[Article]][impGAN]
 
 One of the main problems related to GANs is their convergence. It is not guaranteed and despite the refinement over the architecture, the training can be quite unstable. In this paper, the authors propose different enhancements on the training of GANs. Here are some of them:
 
-* **Feature matching**: instead of having the generator trying to fool the discrimintor as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
+* **Feature matching**: instead of having the generator trying to fool the discriminator as much as possible, they propose a new objective. This objective requires the generator to generate data that matches the statistics of the real data. In this case, the discriminator is only used to specify which are the statistics worth matching.
 * **Historical averaging**: when updating the parameters, also take into account their past values.
 * **One-sided label smoothing**: this one is pretty easy: simply make your discriminator target output from [0=fake image, 1=real image] to [0=fake image, 0.9=real image]. Yeah, this improves the training.
 * **Virtual batch normalization**: avoid dependency of data on the same batch by using statistics collected on a reference batch. Computationally expensive, so only used on generator net.
@@ -137,11 +137,11 @@ Differences between Z and Y on MNIST samples. Z is fixed on rows and Y on column
 
 There are lots of interesting articles on the subject. Among them, I highlight these two:
 
-* __Learning what and where to draw__ [[article]][Reed_art] [[code]][Reed_code]: in this paper, the authors propose a mechanism to tell (via text descriptions) the GAN not only how you would like the content of the image to be (what), but also the position of the element via bounding boxes / landmarks. Have a look at the results: 
+* __Learning what and where to draw__ [[article]][Reed_art] [[code]][Reed_code]: in this paper, the authors propose a mechanism to tell (via text descriptions) the GAN not only how you would like the content of the image to be (what), but also the position of the element via bounding boxes/landmarks. Have a look at the results: 
 
 ![Learning what and where to draw figure]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Reed_figure.jpg){: .center-image }
 
-* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generating high quality images. See by yourself:
+* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low-resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and a higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generating high-quality images. See by yourself:
 
 ![Samples from StackGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/StackGAN_samples.jpg){: :height="auto" width="490px" .center-image }
 
@@ -158,14 +158,14 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 Have you ever wondered what kind of information does the input noise Z encode in a GAN? It usually encodes different types of features of the images in a very "noisy" way. For example, you could take one position of this Z vector, and change its values from -1 and 1. This is what you would see on a model trained on MNIST digit dataset:
 
 ![Interpolations on Z]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Z_interpolation.jpg){: :height="auto" .center-image }
-Interpolation on Z. First image has one of the positions at -1, and it gets interpolated to 1 at the last image.
+Interpolation on Z. The first image has one of the positions at -1, and it gets interpolated to 1 at the last image.
 {: .img-caption}
 
 It seems to me a kind of 4 slowly transformed to a "Y" (most likely, a fusion between a 4 and a 9). So, this is what I was referring to by encoding this information in a noisy manner: one single position of Z is a parameter of more than one feature of the image. In this case, this position changed the digit itself (from 4 to 9, sort of) and the style (from bold to italic). Then, you could not define any exact meaning to that position of Z.
 
 What if we could have some of the positions of Z to represent unique and constrained information, just as the conditional information Y in cGAN does? What if the first position was a value between 0 and 9 that controlled the number of the digit, and the second position controlled their rotation? This is what the authors propose in their article. The interesting part is that, unlike cGANs, they achieve this in an unsupervised approach, without label information.
 
-This is how they do it. They take Z vector and split it in two parts: C and Z. 
+This is how they do it. They take Z vector and split it into two parts: C and Z. 
 
 * C will encode the semantic features of the data distribution.
 * Z will encode all the unstructured noise of this distribution.
@@ -204,7 +204,7 @@ Do you know when to stop training just by looking at this figure? Me neither!
 
 This interpretability issue is one of the problems that Wasserstein GANs solves. How? GANs can be interpreted to minimize the Jensen-Shannon divergence, which is 0 if the real and fake distribution don't overlap (which is usually the case). So, instead of minimizing the JS divergence, the authors use the Wasserstein distance, which describes the distance between the "points" from one distribution to the other. This is the main idea, but if you would like to know more, I highly recommend visiting this [link][WasGANdropbox] for a more in-depth analysis or reading the article itself. 
 
-As a result, WassGAN has a loss function that correlates with image quality and converges. It is also more stable, meaning that it is not as dependant on the architecture. For example, it works quite well even if you remove batch normalization or try weird architectures.
+As a result, WassGAN has a loss function that correlates with image quality and converges. It is also more stable, meaning that it is not as dependent on the architecture. For example, it works quite well even if you remove batch normalization or try weird architectures.
 
 ![WassGAN loss function]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/WassGAN_loss_function.jpg){: :height="auto" width="580px" .center-image }
 This is the plot of the WassGAN loss function. The lower the loss, the higher the image quality. Neat!
@@ -229,7 +229,7 @@ So, that's all for now! I know that there is still more interesting research to 
 
 For an extensive research list, check this [list][GANpapers].
 
-Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know at the comment section below. Feel free also to ask me or comment anything!
+Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below. Feel free also to ask me or comment anything!
 
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
 [introGAN1]: http://blog.evjang.com/2016/06/generative-adversarial-nets-in.html

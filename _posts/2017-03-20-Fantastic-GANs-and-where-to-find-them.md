@@ -112,7 +112,7 @@ These are supposed to be dog images. As you can see, DCGAN fails to represent th
 
 **TL;DR:** these are GANs that use extra label information. This results in better quality images and being able to control -- to an extent -- how generated images will look.
 
-[[Original article]](cGAN_art)
+[[Original article]][cGAN_art]
 
 Conditional GANs are an extension of the GAN framework. Here we have conditional information Y that describes some aspect of the data. For example, if we are dealing with faces, Y could describe attributes such as hair color and gender. Then, this attribute information is inserted in both the generator and the discriminator.
 

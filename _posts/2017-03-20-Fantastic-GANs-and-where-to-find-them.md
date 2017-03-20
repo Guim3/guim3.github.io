@@ -34,11 +34,11 @@ First things first, this is what you __won't__ find in this post:
 If you are familiar with GANs you can probably [skip](#gans-evolution) this section.
 {: .date}
 
-If you are reading this, chances are that you have heard GANs are pretty promising. Is the hype justified? This is what Yann LeCun, director of Facebook AI, thinks:
+If you are reading this, chances are that you have heard GANs are pretty promising. Is the hype justified? This is what Yann LeCun, director of Facebook AI, thinks about them:
 
 > "Generative Adversarial Networks is the most interesting idea in the last ten years in machine learning."
 
-I personally think that GANs have a huge potential but we still have a lot to figure out!
+I personally think that GANs have a huge potential but we still have a lot to figure out.
 
 ![All aboard the GAN train](https://cdn.meme.am/instances/500x/48663315.jpg){:height="auto" width="45%" .center-image}
 
@@ -51,7 +51,7 @@ GAN training overview.
 {: .img-caption}
 
 At first, the generator generates images. It does this by sampling a vector noise Z from a simple distribution (e.g. normal) and then upsampling this vector up to an image. In the first iterations, these images will look very noisy. 
-Then, the discriminator is given fake and real images and learns to distinguish them. The generator later receives the "feedback" of the discriminator with backpropagation, becoming better at generating images. At the end, we want that the distribution of fake images is as close as possible to the distribution of real images. Or, in simple words, we want fake images to look as plausible as possible.
+Then, the discriminator is given fake and real images and learns to distinguish them. The generator later receives the "feedback" of the discriminator through a backpropagation step, becoming better at generating images. At the end, we want that the distribution of fake images is as close as possible to the distribution of real images. Or, in simple words, we want fake images to look as plausible as possible.
 
 It is worth mentioning that due to the minimax optimization used in GANs, the training might be quite unstable. There are some [hacks][GANhacks], though, that you can use for a more robust training.
 
@@ -127,7 +127,7 @@ These are supposed to be dog images. As you can see, DCGAN fails to represent th
 Conditional GANs are an extension of the GAN framework. Here we have conditional information Y that describes some aspect of the data. For example, if we are dealing with faces, Y could describe attributes such as hair color or gender. Then, this attribute information is inserted in both the generator and the discriminator.
 
 ![Conditional GAN overview]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/cGAN_overview.jpg){: .center-image }
-Overview of a conditional GAN.
+Overview of a conditional GAN with face attributes information.
 {: .img-caption}
 
 Conditional GANs are interesting for two reasons: 
@@ -161,10 +161,10 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 [[Article]][infoGAN]
 
-Have you ever wondered what kind of information does the input noise Z encode in a GAN? It usually encodes different types of features of the images in a very "noisy" way. For example, you could take one position of the Z vector, and change its values from -1 and 1. This is what you would see on a model trained on MNIST digit dataset:
+Have you ever wondered what kind of information does the input noise Z encode in a GAN? It usually encodes different types of features of the images in a very "noisy" way. For example, you could take one position of the Z vector, and interpolate its values from -1 and 1. This is what you would see on a model trained on MNIST digit dataset:
 
 ![Interpolations on Z]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Z_interpolation.jpg){: :height="auto" .center-image }
-Interpolation on Z. The first image has one of the positions at -1, and it gets interpolated to 1 (last image).
+Interpolation on Z. Top left image has the Z position set to -1. Then, it gets interpolated to 1 (bottom right image).
 {: .img-caption}
 
 In the figure above, the generated image seems a kind of 4 slowly transformed into a "Y" (most likely, a fusion between a 4 and a 9). So, this is what I am referring to by encoding this information in a noisy manner: one single position of Z is a parameter of more than one feature of the image. In this case, this position changed the digit itself (from 4 to 9, sort of) and the style (from bold to italic). Then, you could not define any exact meaning for that position of Z.
@@ -182,7 +182,7 @@ How do they force C to encode these features? They change the loss function to p
 The first position of C encodes the digit class, while the 2nd position encodes the rotation.
 {: .img-caption}
 
-However, there's a price to pay for not using label information. The limitation here is that these encodings only work with fairly simple datasets, such as the MNIST dataset. Moreover, you still need to "hand-craft" each position of C. In the article, for example, they need to specify that the 1st position of C is an integer between 0 and 9 so it fits with the 10 digit classes on the dataset. So, you might consider this not to be 100% unsupervised, as you might need to provide some minor details to the model.
+However, there's a price to pay for not using label information. The limitation here is that these encodings only work with fairly simple datasets, such as [MNIST][MNIST] digits. Moreover, you still need to "hand-craft" each position of C. In the article, for example, they need to specify that the 1st position of C is an integer between 0 and 9 so it fits with the 10 digit classes of the dataset. So, you might consider this not to be 100% unsupervised, as you might need to provide some minor details to the model.
 
 #### You might want to use infoGANs if
 
@@ -233,7 +233,7 @@ This is the plot of the WassGAN loss function. The lower the loss, the higher th
 * [Interactive image generation][iGAN]
 * [Increase image quality with GANs][GAN_img_qual]
 
-For an extensive research list, check this [list][GANpapers]. Also, in this [repo][GANcodes] you will find all sorts of GAN implementations in Tensorflow and Torch.
+For an extensive research list, check this [link][GANpapers]. Also, in this [repo][GANcodes] you will find all sorts of GAN implementations in Tensorflow and Torch.
 
 Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below. Feel free also to ask me or comment anything.
 

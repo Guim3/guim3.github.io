@@ -205,7 +205,7 @@ GANs have always had problems with convergence and, as a consequence, you don't 
 For example, see these two uninformative loss functions plots of a DCGAN perfectly able to generate [MNIST][MNIST] samples:
 
 ![Uninformative loss functions]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/crazy_loss_function.jpg){: :height="auto" width="610px" .center-image }
-Do you know when to stop training just by looking at this figure? Me neither!
+Do you know when to stop training just by looking at this figure? Me neither.
 {: .img-caption}
 
 This interpretability issue is one of the problems that Wasserstein GANs aims to solve. How? GANs can be interpreted to minimize the Jensen-Shannon divergence, which is 0 if the real and fake distribution don't overlap (which is usually the case). So, instead of minimizing the JS divergence, the authors use the Wasserstein distance, which describes the distance between the "points" from one distribution to the other. This is roughly the main idea, but if you would like to know more, I highly recommend visiting this [link][WasGANdropbox] for a more in-depth analysis or reading the article itself. 

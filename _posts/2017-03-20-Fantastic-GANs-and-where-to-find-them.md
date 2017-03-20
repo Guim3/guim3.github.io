@@ -19,13 +19,14 @@ First things first, this is what you __won't__ find in this post:
 * Being up to date
 * A lot of links to other sites, posts and articles so you can decide where to focus on
 
+#### Index
 1. [Understanding GANs](#understanding-GANs)
 2. [GANs: the evolution](#gans-evolution)
-	2.1. [DCGANs](#dcgans)
-	2.2. [Improved DCGANs](#improved-dcgans)
-	2.3. [Conditional GANs](#cGANs)
-	2.4. [InfoGANs](#infoGANs)
-	2.5. [Wasserstein GANs](#wassGANs)
+	1. [DCGANs](#dcgans)
+	2. [Improved DCGANs](#improved-dcgans)
+	3. [Conditional GANs](#cGANs)
+	4. [InfoGANs](#infoGANs)
+	5. [Wasserstein GANs](#wassGANs)
 3. [Closing](#closing)
 
 ## <a name="understanding-GANs"></a> Understanding GANs

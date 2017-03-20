@@ -16,7 +16,6 @@ First things first, this is what you __won't__ find in this post:
 
 #### What this post is about
 * A summary of relevant topics about GANs
-* Being up to date
 * A lot of links to other sites, posts and articles so you can decide where to focus on
 
 #### Index

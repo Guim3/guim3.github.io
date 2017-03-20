@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fantastic GANs and where to find them
-date: 2017-03-17
+date: 2017-03-20
 published: true
 ---
 

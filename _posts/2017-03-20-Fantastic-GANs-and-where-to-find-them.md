@@ -231,11 +231,11 @@ This is the plot of the WassGAN loss function. The lower the loss, the higher th
 * [Image-to-image translation][pix2pix]
 * [Interactive image generation][iGAN]
 * [Increase image quality with GANs][GAN_img_qual]
-* [DiscoGANs][DiscoGANs]
+* [Transform a shoe into its equivalent bag (DiscoGANs)][DiscoGANs]
 
 For an extensive research list, check this [link][GANpapers]. Also, in this [repo][GANcodes] you will find all sorts of GAN implementations in Tensorflow and Torch.
 
-Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [reddit][reddit]. Feel free also to ask me or comment anything.
+Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [this reddit thread][reddit]. Feel free also to ask me or comment anything.
 
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
 [introGAN1]: http://blog.evjang.com/2016/06/generative-adversarial-nets-in.html

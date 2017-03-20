@@ -233,7 +233,7 @@ This is the plot of the WassGAN loss function. The lower the loss, the higher th
 * [Interactive image generation][iGAN]
 * [Increase image quality with GANs][GAN_img_qual]
 
-For an extensive research list, check this [list][GANpapers].
+For an extensive research list, check this [list][GANpapers]. Also, in this [repo][GANcodes] you will find all sorts of GAN implementations in Tensorflow and Torch.
 
 Thanks for reading! If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below. Feel free also to ask me or comment anything.
 
@@ -271,3 +271,4 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [pix2pix]: https://phillipi.github.io/pix2pix/
 [iGAN]: https://github.com/junyanz/iGAN
 [GAN_img_qual]: https://arxiv.org/abs/1609.04802
+[GANcodes]: https://github.com/wiseodd/generative-models

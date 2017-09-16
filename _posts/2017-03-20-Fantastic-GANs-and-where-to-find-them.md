@@ -39,7 +39,7 @@ If you are reading this, chances are that you have heard GANs are pretty promisi
 
 I personally think that GANs have a huge potential but we still have a lot to figure out.
 
-![All aboard the GAN train](https://cdn.meme.am/instances/500x/48663315.jpg){:height="auto" width="45%" .center-image}
+![All aboard the GAN train]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/hype_train.jpg){:height="auto" width="45%" .center-image}
 
 So, what are GANs? I'm going to describe them very briefly. In case you are not familiar with them and want to know more, there are a lot of great sites with good explanations. As a personal recommendation, I like the ones from [Eric Jang][introGAN1] and [Brandon Amos][introGAN2].
 

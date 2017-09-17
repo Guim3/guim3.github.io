@@ -7,7 +7,7 @@ published: true
 
 Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them](#original_post). If you haven't checked that article or you are completely new to GANs, it might be helpful if you give it a quick read. It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
 
-<blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
+<blockquote class="twitter-tweet tw-align-center" data-lang="en"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 So, having this in mind, it's always a good idea to take a look at the literature and get a summary of the most promising advances so far. Let's do this.
@@ -39,8 +39,8 @@ Let's get a brief refresher from the last post.
 
 * **What are GANs**: two neural networks competing (and learning) against each other. Popular uses for GANs are generating fake images, but they can also be used for unsupervised learning (e.g. learn features from your data without labels).
 
-![You don't need to design a loss function if a discriminator can design one for you]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/roll_safe_GANs.jpg){: .center-image }
-GAN training overview.
+![You don't need to design a loss function if a discriminator can design one for you]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/roll_safe_GANs.jpg){:height="auto" width="45%" .center-image}
+GANs in a nutshell.
 {: .img-caption}
 
 * **Relevant models from previous post**
@@ -89,7 +89,7 @@ Here are a bunch of links to other interesting posts:
 
 * [GANs comparison](#GANS_no_cherry): in this link, different versions of GANs are tested without cherry picking. This is a important remark, as generated images shown in publications couldn't be really representative of the overall performance of the model.
 * [Some theory behind GANs](#GAN_theories): in a similar way to this post, this link contains some nice explanations of the theory (specially the loss function) of the main GAN models.
-* [High resolution generated images](high_res_GANs): this is more of a curiosity, but here you can actually see how 4kx4k generated images actually look like (usually, they aren't larger than 256x256).
+* [High resolution generated images](high_res_GANs): this is more of a curiosity, but here you can actually see how 4k x 4k generated images actually look like (usually, they aren't larger than 256 x 256).
 
 [original_post]: http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers

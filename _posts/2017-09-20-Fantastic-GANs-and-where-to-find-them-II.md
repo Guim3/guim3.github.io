@@ -2,17 +2,17 @@
 layout: post
 title: Fantastic GANs and where to find them II
 date: 2017-09-20
-published: false
+published: true
 ---
 
-Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them](#original_post). If you haven't checked that article or you are completely new to GANs, it might be helpful if you give it a quick read. It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to being up to date:
+Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them](#original_post). If you haven't checked that article or you are completely new to GANs, it might be helpful if you give it a quick read. It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
 
 <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 So, having this in mind, it's always a good idea to take a look at the literature and get a summary of the most promising advances so far. Let's do this.
 
-Don't worry. Get yourself comfortable. Let's see what relevant advances have happened in these lasts 6 months so far.
+Don't worry. Get yourself comfortable. Let's see what relevant advances have happened in these last 6 months so far.
 
 #### What this post is not about
 This is what you __won't__ find in this post:
@@ -27,14 +27,11 @@ This is what you __won't__ find in this post:
 
 #### Index
 1. [Refresher](#refresher)
-2. [GANs: the evolution (part II)](#gans-evolution)
-	1. [DCGANs](#dcgans)
-	2. [Improved DCGANs](#improved-dcgans)
-	3. [Conditional GANs](#cGANs)
-	4. [InfoGANs](#infoGANs)
-	5. [Wasserstein GANs](#wassGANs)
+2. [GANs: the evolution (part II)](#gans-evolution-II)
+	1. [Improved WGANs](#impWGANs)
+	2. [BEGANs](#BEGANs)
 3. [Other useful resources](#useful-resources)
-3. [Closing](#closing)
+4. [Closing](#closing)
 
 ## <a name="refresher"></a> Refresher
 
@@ -46,14 +43,15 @@ Let's get a brief refresher from the last post.
 GAN training overview.
 {: .img-caption}
 
-* **Relevant models**
+* **Relevant models from previous post**
 	1. Generative Adversarial Networks: the original, vanilla, GANs.
 	2. Deep Convolutional GANs (DCGANs): first major improvement on the GAN architecture in terms of training stability and quality of the samples.
-	3. Improved DCGANs: another improvement over the previous baseline, DCGANs. It allows to generate higher-resolution images.
+	3. Improved DCGANs: another improvement over the previous baseline, DCGANs. It allows generating higher-resolution images.
 	4. Conditional GANs (cGANs): GANs that use label information to enhance the quality of the images and control how these images will look.
-	5. Wassertein GANs (WGANs): redesign of the original loss function, which correlates with image quality. This also improves training stability and makes WGANs less reliant on the architecture.
+	5. InfoGANs: this type is able to encode meaningful image features in a completely unsupervised way. For example, on the digit dataset MNIST, they encode the rotation of the digit.
+	6. Wassertein GANs (WGANs): redesign of the original loss function, which correlates with image quality. This also improves training stability and makes WGANs less reliant on the network architecture.
 
-## <a name="gans-evolution"></a> GANs: the evolution (part II)
+## <a name="gans-evolution-II"></a> GANs: the evolution (part II)
 
 
 ### <a name="dcgans"></a>BEGANs?
@@ -61,7 +59,11 @@ GAN training overview.
 
 [[Article]][DCGAN_art]
 
+Improved WGANs
+
 BEGAN
+
+
 
 EBGAN?
 

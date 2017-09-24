@@ -77,11 +77,6 @@ Where WGAN-GP is clearly superior is on generating high quality samples on archi
 ![WGAN-GP other architectures comparison]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_comparison_other.jpg){:height="auto" width="500px" .center-image}
 {: .img-caption}
 
-
-	Result: faster convergence, higher quality samples, no hyperparameter tuning required.
-
-	Contributions: prove weight clipping leads to pathological behaviour. WGAN with gradient penalty. Stable training with difficult architecture settings (e.g. very deep residual networks work for first time in GAN setting).
-
 There are a lot of other interesting details that I had not mentioned, as it'd would go far beyond the scope of this post. For those that want to know more (e.g. why the gradient penalty is applied just to "some" gradients or how to a apply this improved WGAN to text), I recommend taking a look at the [article][impWGAN_paper].
 
 #### You might want to use WGANs-GP if

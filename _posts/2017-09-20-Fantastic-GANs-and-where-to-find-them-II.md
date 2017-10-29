@@ -80,18 +80,45 @@ Where WGAN-GP is clearly superior is on generating high quality samples on archi
 There are a lot of other interesting details that I had not mentioned, as it'd would go far beyond the scope of this post. For those that want to know more (e.g. why the gradient penalty is applied just to "some" gradients or how to a apply this improved WGAN to text), I recommend taking a look at the [article][impWGAN_paper].
 
 #### You might want to use WGANs-GP if
-you want an improved version of the WGAN (that redundancy) which
+you want an improved version of the WGAN which
 
 * converges faster.
-* is not as dependant on the architecture used.
+* works on a wide variety of architectures and datasets.
 * doesn't require as much hyperparameter tuning as other GANs.
-* gets to generate high quality samples on scenarios where other GANs fail.
 
 
-BEGANs?
-**TL;DR:**  
+### <a name="BEGANs"></a> Boundary Equilibrium GANs (BEGANs)
 
-https://www.reddit.com/r/MachineLearning/comments/633jal/r170310717_began_boundary_equilibrium_generative/dfrktje/
+**TL;DR:** GANs using an auto-encoder for the discriminator that can be successfully trained with a simple architecture. They incorporate a dynamic term that balances both discriminator and generator during training. 
+
+[[Article]][BEGAN_paper]
+
+Fun fact: BEGANs were published on the very same day as the WGAN-GP paper.
+
+The main difference from BEGANs to the rest of GANs baseline is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are not auto-encoders the evil because they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two ideas:
+
+1. Why reconstruction loss? The explanation from the authors is that we can rely on the assumption that matching the reconstruction loss distribution will end up matching the sample distributions.
+
+2. Which leads us to: how? An important remark is that the reconstruction loss from the auto-encoder/discriminator (i.e. given this input image, give me the best reconstruction) is not the final loss that BEGANs are minimizing. This reconstruction loss is just a step to calculate the final loss. And the final loss is calculated using the Wassertein distance (yes, it's everywhere now) between the reconstruction loss on real and generated data.
+
+This might be a lot of information at once, but I'm sure that, once we see how this loss function is applied on the generator and discriminator, it'll be much clearer:
+
+* The generator focuses on generating images that the discriminator will be able to reconstruct well.
+* The discriminator tries to reconstruct real images as good as possible while reconstructing generated images with the maximum error.
+
+Another interesting contribution is what they call the diversity factor. This factor controls how much do you want the discriminator to focus on getting a perfect reconstruction on real images (quality) vs distinguish real images from generated (diversity). Then, they go one step further and use this diversity factor to mantain a balance between the generator and discriminator during training. Similarly to WGANs, they use this equilibrium between both networks as a measure of convergence that correlates with image quality. However, unlike WGANs (and WGANs-GP), they use Wassertein distance in such a way that the Lipschitz constrain is not required.
+
+As a result, BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) are impressive*:
+
+![BEGAN face samples]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/BEGAN_samples.jpg){:height="auto" width="400px" .center-image}
+{: .img-caption}
+
+*However, there's an important detail to be considered in this paper. They are using an unpublished dataset which is almost twice the size of the widely used [CelebA][celeba] dataset. Then, for a more realistic qualitative comparison, I invite you to check [any implementation of BEGANs][BEGAN-tf] using CelebA and see the generated samples.
+
+As a final note, if you want to know more about BEGANs, I recommend reading this [blog post][BEGAN_blogpost], which goes much more into detail.
+
+#### You might want to use BEGANs...
+... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ on their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. WGAN-GP has a better Inception score and yet BEGANs generate very high quality samples. Both are innovative and promising.
 
 [[Article]][DCGAN_art]
 
@@ -119,6 +146,12 @@ https://arxiv.org/abs/1709.02023
 //Mira aquest link per explicació de Boundary Seeking, Least Squares GANs i CoGANs
 https://wiseodd.github.io/techblog/
 
+Last one: Progressive growings of GANs (Nvidia)
+Article: http://research.nvidia.com/sites/default/files/pubs/2017-10_Progressive-Growing-of//karras2017gan-paper.pdf
+https://www.reddit.com/r/MachineLearning/comments/795jln/r_progressive_growing_of_gans_for_improved/
+Resum: https://github.com/aleju/papers/blob/master/neural-nets/Progressive_Growing_of_GANs.md
+Video: https://www.youtube.com/watch?v=XOxxPcy5Gr4
+
 ## <a name="useful-resources"></a> Other useful resources
 
 Here are a bunch of links to other interesting posts:
@@ -133,3 +166,9 @@ Here are a bunch of links to other interesting posts:
 [GANs_no_cherry]: https://github.com/khanrc/tf.gans-comparison
 [high_res_GANs]: http://mtyka.github.io/machine/learning/2017/06/06/highres-gan-faces.html
 [impWGAN_paper]: https://arxiv.org/abs/1704.00028
+[EBGANs]: https://arxiv.org/abs/1609.03126
+[BEGAN_paper]: https://arxiv.org/abs/1703.10717
+[VAEs_blurry]: {{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/VAEs_blurred_samples.jpg
+[BEGAN_blogpost]: https://blog.heuritech.com/2017/04/11/began-state-of-the-art-generation-of-faces-with-generative-adversarial-networks/
+[celeba]: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+[BEGAN-tf]: https://github.com/carpedm20/BEGAN-tensorflow

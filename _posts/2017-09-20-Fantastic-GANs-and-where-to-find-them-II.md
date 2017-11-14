@@ -121,45 +121,18 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 #### You might want to use BEGANs...
 ... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ on their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. As Theis et al. says in [his paper][Theis], you should choose one evaluation method or another depending on the application. In this case, WGAN-GP has a better Inception score and yet BEGANs generate very high quality samples. Both are innovative and promising.
 
-### <a name="StackGANs"></a> StackGANs++
-
-**TL;DR:**
-
-[[Article]][StackGAN++] [[Code]][StackGAN++_code]
-StackGAN++
-https://github.com/hanzhanggit/StackGAN-v2/blob/master/examples/StackGAN++.pdf
-
-Check state of the art of conditional GANs (Reed?)
-CycleGANs seem to be the state of the art on conditional GANs.
-Check more carefully StackGAN follow ups. Also Learning what and where to draw follow ups.
-Reed: make sure this is not about GANs: http://www.scottreed.info/files/txtstruct2pixel.pdf
-
-
-
-CasualGAN?  Sembla tot massa teòric pel meu gust.
-https://arxiv.org/abs/1709.02023 
-
-Splitting GANs? The only GANs that beat ProGANs at Inception score
-
 ### <a name="ProGANs"></a> Progressive growings of GANs
 
-**TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. 
+**TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed.
 
 [[Article]][ProGANs_article] [[Code]][ProGANs_code]
-
-
-//When facing the challenge of generating high resolution images, often two problem arise: 
-
-//* The higher the resolution, the easier is to tell a generated image from a real. Higher standards.
-//* Images are larger, minibatch size needs to be smaller for everything to fit in GPU memory.
 
 Generating high resolution images is a big challenge. The larger the image, the easier is for the network to mess up. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
 
 ProGANs, which are built upon [WGANs-GP](#impWGANs), introduce a smart way to progressively add new layers on training time. Each one of these layers upsample the images to a higher resolution for both the discriminator and generator. Let's go step by step:
 
-1. Start with G and D producing low resolution images.
-*REVISAR*
-2. At some point, we want to increase the resolution. This is done very elegantly with a smoothing:
+1. Start with the generator and discriminator training with low resolution images.
+2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
 	
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
@@ -168,11 +141,11 @@ Instead of just adding a new layer directly, it's added on small linear steps co
 Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
 The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
 
-3. Once the smoothing is done, keep training the generator and discriminator. Go to step 2 if the resolution of current generated images is not the target resolution.
+3. Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of current generated images is not the target resolution.
 
 *But, wait a moment...*
 ...isn't this upsampling and concatenation of new high resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs - which need to be trained separately - per upsampling. You want to upsample 3 times? Train 3 GANs. 
-On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding 3 layers on training time, as opposed of training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off more elegantly, with better results and without extra conditional information.
+On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding more layers on training time, as opposed of training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off elegantly, with better results and without extra conditional information.
 
 As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x (1024x1024 images). The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high resolution layers converge).
 
@@ -180,55 +153,34 @@ As a result of this progressive training, generated images in ProGANs have highe
 The resulting generated images are impressive (at the time of writing this :P).
 {: .img-caption}
 
-Additionally, the paper proposes new design decisions to further improve the performance of model. I'll briefly describe them:
+*Other improvements*. Additionally, the paper proposes new design decisions to further improve the performance of model. I'll briefly describe them:
 
 * Minibatch standard deviation: encourages each minibatch to have similar statistics using the standard deviation over all features of the minibatch. This is then summarized as a single value in a new layer that is inserted towards the end of the network.
 
-* Equalized learning rate: makes sure that the learning speed is the same for all weights by dividing each weight by a constant.
+* Equalized learning rate: makes sure that the learning speed is the same for all weights by dividing each weight by a constant continously during training.
 
-* Pixelwise normalization: on the generator each feature vector is normalized to unit length after each convolutional layer. This is done to prevent the magnitudes of the generator and discriminator from escalate.
+* Pixelwise normalization: on the generator each feature vector is normalized after each convolutional layer (exact formula in the paper). This is done to prevent the magnitudes of the gradients of the generator and discriminator from escalating.
 
-As a side note, it is worth to mention that the authors enhanced and prepared the original CelebA for high resolution training: CelebA-HQ. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce depth-of-field effect, and detect the landmarks of the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
- 
-*Revisar resums d'internet*
+*CelebA-HQ*. As a side note, it is worth mentioning that the authors enhanced and prepared the original CelebA for high resolution training: CelebA-HQ. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce depth-of-field effect, and detect landmarks on the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
 
-Abstract:
-	- Overpowered StackGANs?
-	- Implementation details to avoid "unhealthy" competition between D and G
-	- New metric for GAN evaluation
-
-High-resolution images problems:
-	- Easier to tell generated from real
-	- Smalles minibatches, training instability
-
-		That is, using a residual layer and an interpolation of α, at first, this new layer is a residual block.
-
-	Section 3 and 4 no afegeixen massa. Són tècniques que potser milloren lleugerament, no val la pena entrar en detall. Pots fer algo com "among other improvements, the main focus here is..."
-
-
-	A restriction to keep in mind is that, if you need to generate high resolution images, your minibatch size will need to be smaller so everything fits. That's why they decrease it from 64 from 14 and they need to adjust the hyperparameters again and remove batch normalization. *other techniques*
-
-New evaluation:
-	- Idea: local image structure of generated image should match " " " of training images.
-	- How to measure local image structure? With a Laplacian pyramid, where you get different levels of spatial frequency band (image descriptors).
-	- Preprocess for each descriptor includes mean and std deviation normalization.
-	- Distance used between descriptors is Wassertein.
-	- Question: could we have a set of generated images which local structure perfectly match the training set but still doesn't look realistic (i.e. plausible, close to the training set) at all?
-
-
-Last one: Progressive growings of GANs (Nvidia)
-Article: https://arxiv.org/abs/1710.10196
-https://www.reddit.com/r/MachineLearning/comments/795jln/r_progressive_growing_of_gans_for_improved/
-Resum: https://github.com/aleju/papers/blob/master/neural-nets/Progressive_Growing_of_GANs.md
-Video: https://www.youtube.com/watch?v=XOxxPcy5Gr4
+*Evaluation*. Finally, a new evaluation method is introduced:
+* The idea behind it is that the local image structure of generated images should match the structure of the training images. 
+* How do we measure local structure? With a Laplacian pyramid, where you get different levels of spatial frequency bands that can be used as descriptors. 
+* Then, we extract descriptors from the generated and real images, normalize them, and check how close they are using the famous Wassertein distance. The lower the distance, the better.
 
 #### You might want to use ProGANs...
-* SotA
-* If you have *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
+* If you want state-of-the-art results. But consider that...
+* ... you will need *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
+* If you want to start questioning your own reality. The next iterations on GANs will create more realistic samples than real life.
 
 ### <a name="honorable-mentions"></a> Honorable mentions
 
 * [Cycle GANs][CycleGANs]: image-to-image translation. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are all you need.
+
+CycleGANs seem to be the state of the art on conditional GANs.
+
+
+Splitting GANs? The only GANs that beat ProGANs at Inception score
 
 ## <a name="useful-resources"></a> Other useful resources
 

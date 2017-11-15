@@ -5,7 +5,7 @@ date: 2017-09-20
 published: false
 ---
 
-Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, it might be helpful if you give it a quick read (there's a brief summary of the previous post [ahead][#refresher]). It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
+Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read (there's a brief summary of the previous post [ahead][#refresher]). It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
 
 <blockquote class="twitter-tweet tw-align-center" data-lang="en"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -30,7 +30,8 @@ This is what you __won't__ find in this post:
 2. [GANs: the evolution (part II)](#gans-evolution-II)
 	1. [Improved WGANs](#impWGANs)
 	2. [BEGANs](#BEGANs)
-	4. [ProGANs](#ProGANs)
+	3. [ProGANs](#ProGANs)
+	4. [Honorable mention: CycleGANs](#honorable-mention)
 3. [Other useful resources](#useful-resources)
 4. [Closing](#closing)
 
@@ -173,11 +174,18 @@ The resulting generated images are impressive (at the time of writing this :P).
 * ... you will need *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
 * If you want to start questioning your own reality. The next iterations on GANs will create more realistic samples than real life.
 
-#### <a name="honorable-mentions"></a> Honorable mention: Cycle GANs
+#### <a name="honorable-mention"></a> Honorable mention: Cycle GANs
 
-* [Cycle GANs][CycleGANs]: this is the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
+[[Article]][CycleGANs_article] [[Code]][CycleGANs_code]
 
-CycleGANs seem to be the state of the art on conditional GANs.
+[Cycle GANs][CycleGANs] are the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
+
+![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="400px" .center-image}
+{: .img-caption}
+
+These GANs don't require paired datasets to learn to translate between domains, which is good because this kind of data is very difficult to obtain. However, Cycle GANs still need to be trained with data from two different domains X and Y (e.g. X: horses, Y: zebras). In order to constrain the translation from one domain to another, they use what they call a "cycle consistent loss". This basically means that if you translate a horse A into a zebra A, transforming the zebra A back to a horse should give you the original horse A as a result.
+
+This mapping from one domain to another is different from the also popular neural style transfer [neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
 ## <a name="useful-resources"></a> Other useful resources
 
@@ -212,7 +220,8 @@ Oh, and I have just created my machine learning twitter account. I'll be sharing
 [BEGAN_blogpost]: https://blog.heuritech.com/2017/04/11/began-state-of-the-art-generation-of-faces-with-generative-adversarial-networks/
 [celeba]: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 [BEGAN-tf]: https://github.com/carpedm20/BEGAN-tensorflow
-[CycleGANs]: https://github.com/junyanz/CycleGAN
+[CycleGANs_article]: https://arxiv.org/pdf/1703.10593.pdf
+[CycleGANs_code]: https://github.com/junyanz/CycleGAN
 [Theis]: https://arxiv.org/abs/1511.01844
 [StackGAN++]: https://arxiv.org/abs/1710.10916
 [StackGAN++_code]: https://github.com/hanzhanggit/StackGAN-v2/
@@ -222,3 +231,4 @@ Oh, and I have just created my machine learning twitter account. I'll be sharing
 [StackGANs]: https://arxiv.org/pdf/1612.03242.pdf
 [waifu_generator]: http://make.girls.moe/#/
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
+[neural_style_transfer]: https://github.com/jcjohnson/neural-style

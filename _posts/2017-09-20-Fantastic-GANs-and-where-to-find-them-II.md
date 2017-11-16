@@ -5,21 +5,19 @@ date: 2017-09-20
 published: false
 ---
 
-Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read (there's a brief summary of the previous post [ahead][#refresher]). It has been 6 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
+Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead][#refresher], though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
 
 <blockquote class="twitter-tweet tw-align-center" data-lang="en"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-So, having this in mind, it's always a good idea to take a look at the literature and get a summary of the most promising advances so far. Let's do this.
-
-Don't worry. Get yourself comfortable. Let's see what relevant advances have happened in these last 6 months so far.
+So, having this in mind. Let's see what relevant advances have happened in these last months so far.
 
 #### What this post is not about
 This is what you __won't__ find in this post:
 
-* Complex technical explanations
-* Code (links to code for those interested, though)
-* An exhaustive research list (you can already find one [here][GANpapers])
+* Complex technical explanations.
+* Code (links to code for those interested, though).
+* An exhaustive research list (you can already find one [here][GANpapers]).
 
 #### What this post is about
 * A summary of relevant topics about GANs, starting where I left it on the [previous post](#original_post).
@@ -37,9 +35,9 @@ This is what you __won't__ find in this post:
 
 ## <a name="refresher"></a> Refresher
 
-Let's get a brief refresher on the last post.
+Let's get a brief refresher from the last post.
 
-* **What are GANs**: two neural networks competing (and learning) against each other. Popular uses for GANs are generating fake images, but they can also be used for unsupervised learning (e.g. learn features from your data without labels).
+* **What are GANs**: two neural networks competing (and learning) against each other. Popular uses for GANs are generating realistic fake images, but they can also be used for unsupervised learning (e.g. learn features from your data without labels).
 
 ![You don't need to design a loss function if a discriminator can design one for you]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/roll_safe_GANs.jpg){:height="auto" width="60%" .center-image}
 GANs in a nutshell.
@@ -55,31 +53,32 @@ GANs in a nutshell.
 
 ## <a name="gans-evolution-II"></a> GANs: the evolution (part II)
 
+Here I'm going to describe in chronological order the most relevant GAN articles that have been published lately. 
 
 ### <a name="impWGANs"></a> Improved WGANs (WGAN-GP)
 **TL;DR:** take Wasserstein GANs and remove weight clipping - which is the cause of some undesirable behaviours - for gradient penalty. This results in faster convergence, higher quality samples and a more stable training. 
 
 [[Article]][impWGAN_paper] [[Code]][impWGAN_code]
 
-WGANs sometimes generate poor quality samples or fail to converge in some settings. This is mainly caused by the weight clipping performed in WGANs as a measure to satisfy the Lipschitz constraint. If you don't know about this constraint, just keep in mind that it's a requirement for WGANs to work properly. Why is weight clipping a problem? Because it biases the WGAN to use much simpler functions. This means that the WGAN might not be able to model a complex data with simple approximations (see image below). Additionally, weight clipping makes vanishing or exploding gradients prone to happen.
+WGANs sometimes generate poor quality samples or fail to converge in some settings. This is mainly caused by the weight clipping performed in WGANs as a measure to satisfy the Lipschitz constraint. If you don't know about this constraint, just keep in mind that it's a requirement for WGANs to work properly. Why is weight clipping a problem? Because it biases the WGAN to use much simpler functions. This means that the WGAN might not be able to model complex data with simple approximations (see image below). Additionally, weight clipping makes vanishing or exploding gradients prone to happen.
 
 ![WGAN-GP 8 Gaussians toy example]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_8_Gaussians.jpg){:height="auto" width="380px" .center-image}
 Here you can see how a WGAN fails to model 8 Gaussians because it uses simple functions. On the other hand, a WGAN-GP correctly models them using more complex functions. 
 {: .img-caption}
 
-So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method which they call gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is what they call gradient penalty, as it penalizes gradients which norms deviate from 1.
+So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method which they call gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is why it's call gradient penalty, as it penalizes gradients which norms deviate from 1.
 
 As a result, WGANs trained using GP rather than weight clipping have faster convergence. Additionally, the training is much more stable to an extent where hyperparameter tuning is no longer required and the architecture used is not as critical. These WGAN-GP also generate high-quality samples, but it is difficult to tell by how much. On proven and tested architectures, the quality of these samples are very similar to the baseline WGAN:
 
 ![WGAN-GP baseline comparison]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_comparison_DCGAN.jpg){:height="auto" width="500px" .center-image}
 {: .img-caption}
 
-Where WGAN-GP is clearly superior is on generating high-quality samples on architectures where other GANs clearly fail. For example, to the authors' knowledge, it has been the first time where a GAN setting has worked on Residual Networks:
+Where WGAN-GP is clearly superior is on generating high-quality samples on architectures where other GANs are prone to fail. For example, to the authors' knowledge, it has been the first time where a GAN setting has worked on residual networks:
 
 ![WGAN-GP other architectures comparison]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_comparison_other.jpg){:height="auto" width="500px" .center-image}
 {: .img-caption}
 
-There are a lot of other interesting details that I had not mentioned, as it'd go far beyond the scope of this post. For those that want to know more (e.g. why the gradient penalty is applied just to "some" gradients or how to a apply this improved WGAN to text), I recommend taking a look at the [article][impWGAN_paper].
+There are a lot of other interesting details that I had not mentioned, as it'd go far beyond the scope of this post. For those that want to know more (e.g. why the gradient penalty is applied just to "some" gradients or how to a apply this model to text), I recommend taking a look at the [article][impWGAN_paper].
 
 #### You might want to use WGANs-GP if
 you want an improved version of the WGAN which
@@ -97,7 +96,7 @@ you want an improved version of the WGAN which
 
 Fun fact: BEGANs were published on the very same day as the WGAN-GP paper.
 
-The main difference from BEGANs to the rest of GANs baseline is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are not auto-encoders the evil because they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two ideas:
+The main difference from BEGANs to the rest of GANs baseline is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are not auto-encoders the evil because they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two points:
 
 1. Why reconstruction loss? The explanation from the authors is that we can rely on the assumption that matching the reconstruction loss distribution will end up matching the sample distributions.
 
@@ -110,7 +109,7 @@ This might be a lot of information at once, but I'm sure that, once we see how t
 
 Another interesting contribution is what they call the diversity factor. This factor controls how much do you want the discriminator to focus on getting a perfect reconstruction on real images (quality) vs distinguish real images from generated (diversity). Then, they go one step further and use this diversity factor to maintain a balance between the generator and discriminator during training. Similarly to WGANs, they use this equilibrium between both networks as a measure of convergence that correlates with image quality. However, unlike WGANs (and WGANs-GP), they use Wasserstein distance in such a way that the Lipschitz constrain is not required.
 
-As a result, BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) are impressive*:
+As a result, BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is impressive*:
 
 ![BEGAN face samples]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/BEGAN_samples.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
@@ -120,15 +119,15 @@ As a result, BEGANs do not need any fancy architecture to train properly; as men
 As a final note, if you want to know more about BEGANs, I recommend reading this [blog post][BEGAN_blogpost], which goes much more into detail.
 
 #### You might want to use BEGANs...
-... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ in their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. As Theis et al. says in [his paper][Theis], you should choose one evaluation method or another depending on the application. In this case, WGAN-GP has a better Inception score and yet BEGANs generate very high-quality samples. Both are innovative and promising.
+... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ in their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. As Theis et al. says in [their paper][Theis], you should choose a evaluation method or another depending on the application. In this case, WGAN-GP has a better Inception score and yet BEGANs generate very high-quality samples. Both are innovative and promising.
 
 ### <a name="ProGANs"></a> Progressive growings of GANs
 
-**TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed.
+**TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed. The quality of the generated images is astonishing.
 
 [[Article]][ProGANs_article] [[Code]][ProGANs_code]
 
-Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to mess up. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
+Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to fail. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
 
 ProGANs, which are built upon [WGANs-GP](#impWGANs), introduce a smart way to progressively add new layers on training time. Each one of these layers upsamples the images to a higher resolution for both the discriminator and generator. Let's go step by step:
 
@@ -202,9 +201,9 @@ Here are a bunch of links to other interesting posts:
 ---
 
 <a name="closing"></a> 
-Hope this post has been useful! As a side note, I'm currently living in London. If you are "on town?" and a GAN nerd like me and want to discuss *TODO*, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to meet and learn from *TODO: alguna cosa graciosa i despectiva tatxada* new people!
+Hope this post has been useful! As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences.
 
-Oh, and I have just created my machine learning twitter account. I'll be sharing my new blog posts there - and maybe some dank convolutional memes. 
+Oh, and I have just created my new [twitter account][twitter]. I'll be sharing my new blog posts there (and some dank convolutional memes). 
 
 [original_post]: http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
@@ -232,3 +231,4 @@ Oh, and I have just created my machine learning twitter account. I'll be sharing
 [waifu_generator]: http://make.girls.moe/#/
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style
+[twitter]: https://twitter.com/GuimPML

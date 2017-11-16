@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fantastic GANs and where to find them II
-date: 2017-09-20
+date: 2017-11-16
 published: true
 ---
 
@@ -131,19 +131,19 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 
 ProGANs, which are built upon [WGANs-GP](#impWGANs), introduce a smart way to progressively add new layers on training time. Each one of these layers upsamples the images to a higher resolution for both the discriminator and generator. Let's go step by step:
 
-1. Start with the generator and discriminator training with low-resolution images.
-2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
-	
-![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
-{: .img-caption}
+	1. Start with the generator and discriminator training with low-resolution images.
+	2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
+		
+	![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
+	{: .img-caption}
 
-Instead of just adding a new layer directly, it's added on small linear steps controled by α.
-Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
-The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
+	Instead of just adding a new layer directly, it's added on small linear steps controled by α.
+	Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
+	The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
 
-3. Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution.
+	3. Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution.
 
-*But, wait a moment...*
+**But, wait a moment...**
 ...isn't this upsampling and concatenation of new high-resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs - which need to be trained separately - per upsampling. Do you want to upsample 3 times? Train 3 GANs. 
 On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding more layers on training time, as opposed to training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off elegantly, with better results and without extra conditional information.
 
@@ -153,7 +153,7 @@ As a result of this progressive training, generated images in ProGANs have highe
 The resulting generated images are impressive (at the time of writing this :P).
 {: .img-caption}
 
-*Other improvements*. Additionally, the paper proposes new design decisions to further improve the performance of the model. I'll briefly describe them:
+**Other improvements**. Additionally, the paper proposes new design decisions to further improve the performance of the model. I'll briefly describe them:
 
 * Minibatch standard deviation: encourages each minibatch to have similar statistics using the standard deviation over all features of the minibatch. This is then summarized as a single value in a new layer that is inserted towards the end of the network.
 
@@ -161,9 +161,9 @@ The resulting generated images are impressive (at the time of writing this :P).
 
 * Pixelwise normalization: on the generator, each feature vector is normalized after each convolutional layer (exact formula in the paper). This is done to prevent the magnitudes of the gradients of the generator and discriminator from escalating.
 
-*CelebA-HQ*. As a side note, it is worth mentioning that the authors enhanced and prepared the original CelebA for high-resolution training: CelebA-HQ. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce a depth-of-field effect, and detect landmarks on the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
+**CelebA-HQ**. As a side note, it is worth mentioning that the authors enhanced and prepared the original CelebA for high-resolution training: CelebA-HQ. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce a depth-of-field effect, and detect landmarks on the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
 
-*Evaluation*. Finally, a new evaluation method is introduced:
+**Evaluation**. Finally, a new evaluation method is introduced:
 * The idea behind it is that the local image structure of generated images should match the structure of the training images. 
 * How do we measure local structure? With a Laplacian pyramid, where you get different levels of spatial frequency bands that can be used as descriptors. 
 * Then, we extract descriptors from the generated and real images, normalize them, and check how close they are using the famous Wasserstein distance. The lower the distance, the better.
@@ -177,25 +177,25 @@ The resulting generated images are impressive (at the time of writing this :P).
 
 [[Article]][CycleGANs_article] [[Code]][CycleGANs_code]
 
-[Cycle GANs][CycleGANs] are the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
+Cycle GANs are the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
 
 These GANs don't require paired datasets to learn to translate between domains, which is good because this kind of data is very difficult to obtain. However, Cycle GANs still need to be trained with data from two different domains X and Y (e.g. X: horses, Y: zebras). In order to constrain the translation from one domain to another, they use what they call a "cycle consistent loss". This basically means that if you translate a horse A into a zebra A, transforming the zebra A back to a horse should give you the original horse A as a result.
 
-This mapping from one domain to another is different from the also popular neural style transfer [neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
+This mapping from one domain to another is different from the also popular [neural style transfer][neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
 ## <a name="useful-resources"></a> Other useful resources
 
 Here are a bunch of links to other interesting posts:
 
 * [GAN playground][GAN_playground]: this is the most straightforward way to play around GANs. Simply click the link, set up some hyperparameters and train a GAN in your browser.
-* [Every paper and code][GAN_everything]: here's a link to all GAN related papers sorted by the number of citations. It also includes courses and Github repos. Very recommended, but the last update was on July 2017. 
+* [Every paper and code][GANs_everything]: here's a link to all GAN related papers sorted by the number of citations. It also includes courses and Github repos. Very recommended, but the last update was on July 2017. 
 * [GANs timeline][GANs_timeline]: similar to the previous link, but this time every paper is ordered according to publishing date.
 * [GANs comparison][GANs_no_cherry]: in this link, different versions of GANs are tested without cherry picking. This is a important remark, as generated images shown in publications might not be really representative of the overall performance of the model.
 * [Some theory behind GANs][GAN_theories]: in a similar way to this post, this link contains some nice explanations of the theory (especially the loss function) of the main GAN models.
-* [High-resolution generated images][high_res_GANs]: this is more of a curiosity, but here you can actually see how 4k x 4k generated images actually look like (usually, they aren't larger than 256 x 256).
+* [High-resolution generated images][high_res_GANs]: this is more of a curiosity, but here you can actually see how 4k x 4k generated images actually look like.
 * [Waifus generator][waifu_generator]: you'll never feel alone ever again ( ͡° ͜ʖ ͡°)
 
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: Fantastic GANs and where to find them II
 date: 2017-11-16
-published: true
+published: false
 ---
 
 Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead][#refresher], though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:

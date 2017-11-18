@@ -213,7 +213,9 @@ Here are a bunch of links to other interesting posts:
 <br>
 
 <a name="closing"></a> 
-Hope this post has been useful! I want to say thanks to Blair Young for his comments to help me improving this post. As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences. Feel free also to leave a comment!
+Hope this post has been useful and thanks for reading!! I want to also say thanks to Blair Young for helping me improving this post with his feedback. If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [this reddit thread][reddit].
+
+As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences.
 
 Oh, and I have just created my new [twitter account][twitter]. I'll be sharing my new blog posts there (and some dank convolutional memes). 
 
@@ -244,3 +246,4 @@ Oh, and I have just created my new [twitter account][twitter]. I'll be sharing m
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style
 [twitter]: https://twitter.com/GuimPML
+[reddit]: TODO

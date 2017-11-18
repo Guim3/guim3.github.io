@@ -5,12 +5,12 @@ date: 2017-11-16
 published: false
 ---
 
-Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead](#refresher), though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémons. Even Andrej Karpathy himself finds it difficult to be up to date:
+Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead](#refresher), though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémon. Even Andrej Karpathy himself finds it difficult to keep up to date:
 
 <blockquote class="twitter-tweet tw-align-center" data-lang="en"><p lang="en" dir="ltr">GANs seem to improve on timescales of weeks; getting harder to keep track of. Another impressive paper and I just barely skimmed the other 3</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/849135057788850177">4th of April 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-So, having this in mind. Let's see what relevant advances have happened in these last months so far.
+So, having this in mind. Let's see what relevant advances have happened in these last months.
 
 #### What this post is not about
 This is what you __won't__ find in this post:
@@ -37,7 +37,7 @@ This is what you __won't__ find in this post:
 
 Let's get a brief refresher from the last post.
 
-* **What are GANs**: two neural networks competing (and learning) against each other. Popular uses for GANs are generating realistic fake images, but they can also be used for unsupervised learning (e.g. learn features from your data without labels).
+* **What are GANs**: two neural networks competing (and learning) against each other. Popular uses for GANs are generating realistic fake images, but they can also be used for unsupervised learning (e.g. learning features from data without labels).
 
 ![You don't need to design a loss function if a discriminator can design one for you]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/roll_safe_GANs.jpg){:height="auto" width="60%" .center-image}
 GANs in a nutshell.
@@ -60,7 +60,7 @@ Here I'm going to describe in chronological order the most relevant GAN articles
 
 [[Article]][impWGAN_paper] [[Code]][impWGAN_code]
 
-**The problem.** WGANs sometimes generate poor quality samples or fail to converge in some settings. This is mainly caused by the weight clipping performed in WGANs as a measure to satisfy the Lipschitz constraint. If you don't know about this constraint, just keep in mind that it's a requirement for WGANs to work properly. Why is weight clipping a problem? Because it biases the WGAN to use much simpler functions. This means that the WGAN might not be able to model complex data with simple approximations (see image below). Additionally, weight clipping makes vanishing or exploding gradients prone to happen.
+**The problem.** WGANs sometimes generate poor quality samples or fail to converge in some settings. This is mainly caused by the weight clipping (clamping all weights into a range [min, max]) performed in WGANs as a measure to satisfy the Lipschitz constraint. If you don't know about this constraint, just keep in mind that it's a requirement for WGANs to work properly. Why is weight clipping a problem? Because it biases the WGAN to use much simpler functions. This means that the WGAN might not be able to model complex data with simple approximations (see image below). Additionally, weight clipping makes vanishing or exploding gradients prone to happen.
 
 ![WGAN-GP 8 Gaussians toy example]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_8_Gaussians.jpg){:height="auto" width="380px" .center-image}
 Here you can see how a WGAN fails to model 8 Gaussians (left) because it uses simple functions. On the other hand, a WGAN-GP correctly models them using more complex functions (right). 
@@ -73,7 +73,7 @@ Here you can see how a WGAN fails to model 8 Gaussians (left) because it uses si
 ![WGAN-GP baseline comparison]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_comparison_DCGAN.jpg){:height="auto" width="500px" .center-image}
 {: .img-caption}
 
-Where WGAN-GP is clearly superior is on generating high-quality samples on architectures where other GANs are prone to fail. For example, to the authors' knowledge, it has been the first time where a GAN setting has worked on residual networks:
+Where WGAN-GP is clearly superior is on generating high-quality samples on architectures where other GANs are prone to fail. For example, to the authors' knowledge, it has been the first time where a GAN setting has worked on residual network architectures:
 
 ![WGAN-GP other architectures comparison]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/WGAN-GP_comparison_other.jpg){:height="auto" width="500px" .center-image}
 {: .img-caption}
@@ -90,13 +90,13 @@ you want an improved version of the WGAN which
 
 ### <a name="BEGANs"></a> Boundary Equilibrium GANs (BEGANs)
 
-**TL;DR:** GANs using an auto-encoder for the discriminator that can be successfully trained with a simple architecture. They incorporate a dynamic term that balances both discriminator and generator during training. 
+**TL;DR:** GANs using an auto-encoder as the discriminator. They can be successfully trained with simple architectures. They incorporate a dynamic term that balances both discriminator and generator during training. 
 
 [[Article]][BEGAN_paper]
 
 _Fun fact: BEGANs were published on the very same day as the WGAN-GP paper._
 
-**Idea.** The main difference from BEGANs to the rest of GANs baseline is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are not auto-encoders the evil because they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two points:
+**Idea.** What sets BEGANSs apart from other GANs is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are auto-encoders not the devil as they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two points:
 
 1. Why reconstruction loss? The explanation from the authors is that we can rely on the assumption that matching the reconstruction loss distribution will end up matching the sample distributions.
 
@@ -107,7 +107,7 @@ This might be a lot of information at once, but I'm sure that, once we see how t
 * The generator focuses on generating images that the discriminator will be able to reconstruct well.
 * The discriminator tries to reconstruct real images as good as possible while reconstructing generated images with the maximum error.
 
-**Diversity factor.** Another interesting contribution is what they call the diversity factor. This factor controls how much do you want the discriminator to focus on getting a perfect reconstruction on real images (quality) vs distinguish real images from generated (diversity). Then, they go one step further and use this diversity factor to maintain a balance between the generator and discriminator during training. Similarly to WGANs, they use this equilibrium between both networks as a measure of convergence that correlates with image quality. However, unlike WGANs (and WGANs-GP), they use Wasserstein distance in such a way that the Lipschitz constrain is not required.
+**Diversity factor.** Another interesting contribution is what they call the diversity factor. This factor controls how much you want the discriminator to focus on getting a perfect reconstruction on real images (quality) vs distinguish real images from generated (diversity). Then, they go one step further and use this diversity factor to maintain a balance between the generator and discriminator during training. Similarly to WGANs, they use this equilibrium between both networks as a measure of convergence that correlates with image quality. However, unlike WGANs (and WGANs-GP), they use Wasserstein distance in such a way that the Lipschitz constrain is not required.
 
 **Results.** BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is impressive*:
 
@@ -127,7 +127,7 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 
 [[Article]][ProGANs_article] [[Code]][ProGANs_code]
 
-Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to fail. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
+Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to fail because the details are more subtle and complex to model. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
 
 **Idea.** ProGANs, which are built upon [WGANs-GP](#impWGANs), introduce a smart way to progressively add new layers on training time. Each one of these layers upsamples the images to a higher resolution for both the discriminator and generator. Let's go step by step:
 
@@ -137,7 +137,7 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instead of just adding a new layer directly, it's added on small linear steps controled by α.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instead of just adding a new layer directly, it's added on small linear steps controlled by α.
 Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
 The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
 
@@ -150,7 +150,7 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 **Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x (1024x1024 images). The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
 
 <iframe width="415" height="415" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
-The resulting generated images are impressive (at the time of writing this :P).
+The resulting generated images are clearly superior to any other GAN seen before.
 {: .img-caption}
 
 **Other improvements**. Additionally, the paper proposes new design decisions to further improve the performance of the model. I'll briefly describe them:
@@ -171,13 +171,13 @@ The resulting generated images are impressive (at the time of writing this :P).
 #### You might want to use ProGANs...
 * If you want state-of-the-art results. But consider that...
 * ... you will need *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
-* If you want to start questioning your own reality. The next iterations on GANs will create more realistic samples than real life.
+* If you want to start questioning your own reality. The next iterations on GANs will might create more realistic samples than real life.
 
 #### <a name="honorable-mention"></a> Honorable mention: Cycle GANs
 
 [[Article]][CycleGANs_article] [[Code]][CycleGANs_code]
 
-Cycle GANs are the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
+Cycle GANs are, at the moment of writing these words, the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
@@ -201,7 +201,7 @@ Here are a bunch of links to other interesting posts:
 ---
 
 <a name="closing"></a> 
-Hope this post has been useful! As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences.
+Hope this post has been useful! I want to say thanks to Blair Young for his comments to help me improving this post. As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences. Feel free also to leave a comment!
 
 Oh, and I have just created my new [twitter account][twitter]. I'll be sharing my new blog posts there (and some dank convolutional memes). 
 

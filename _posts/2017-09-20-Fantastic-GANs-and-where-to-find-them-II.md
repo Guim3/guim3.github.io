@@ -2,7 +2,7 @@
 layout: post
 title: Fantastic GANs and where to find them II
 date: 2017-11-16
-published: false
+published: true
 ---
 
 Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead](#refresher), though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémon. Even Andrej Karpathy himself finds it difficult to keep up to date:
@@ -134,12 +134,12 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 1. Start with the generator and discriminator training with low-resolution images.
 2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
 
-![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
+    ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instead of just adding a new layer directly, it's added on small linear steps controlled by α.
-Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
-The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
+    Instead of just adding a new layer directly, it's added on small linear steps controlled by α.
+    Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
+    The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
 
 3\. Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution.
 

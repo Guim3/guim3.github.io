@@ -192,7 +192,7 @@ These GANs don't require paired datasets to learn to translate between domains, 
 
 This mapping from one domain to another is different from the also popular [neural style transfer][neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
-![]({{site.baseurl}}/files/blog/common/separator1.png){.center-image}
+![]({{site.baseurl}}/files/blog/common/separator1.png){:height="auto" .center-image}
 
 Let's recap. We have had two major improvements, WGANs-GP and BEGANs. Despite following different research directions, they both offer similar advantages. Then, we have ProGANs (based on WGANs-GP), which unlock the path to generate realistic high-resolution images. Meanwhile, CycleGANs reminds us about the power of GANs to extract meaningful information from a dataset and how this information can be transferred to another unrelated data distribution. 
 

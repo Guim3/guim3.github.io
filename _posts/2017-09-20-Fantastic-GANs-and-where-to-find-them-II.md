@@ -125,7 +125,7 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 #### You might want to use BEGANs...
 ... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ in their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. As Theis et al. says in [their paper][Theis], you should choose a evaluation method or another depending on the application. In this case, WGAN-GP has a better Inception score and yet BEGANs generate very high-quality samples. Both are innovative and promising.
 
-### <a name="ProGANs"></a> Progressive growings of GANs
+### <a name="ProGANs"></a> Progressive growing of GANs (ProGANs)
 <div class="date">October 2017</div>
 
 **TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed. The quality of the generated images is astonishing.
@@ -193,6 +193,8 @@ These GANs don't require paired datasets to learn to translate between domains, 
 This mapping from one domain to another is different from the also popular [neural style transfer][neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
 ![]({{site.baseurl}}/files/blog/common/separator1.png){.center-image}
+
+Let's recap. We have had two major improvements, WGANs-GP and BEGANs. Despite following different research directions, they both offer similar advantages. Then, we have ProGANs (based on WGANs-GP), which unlock the path to generate realistic high-resolution images. Meanwhile, CycleGANs reminds us about the power of GANs to extract meaningful information from a dataset and how this information can be transferred to another unrelated data distribution. 
 
 ## <a name="useful-resources"></a> Other useful resources
 

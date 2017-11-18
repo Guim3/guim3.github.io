@@ -220,7 +220,9 @@ This is the plot of the WassGAN loss function. The lower the loss, the higher th
 * you are looking for a state-of-the-art GAN with the highest training stability.
 * you want an informative and interpretable loss function.
 
----
+<br>
+![]({{site.baseurl}}/files/blog/common/separator2.png){:height="auto" width="250px" .center-image}
+<br>
 
 <a name="closing"></a> So, that's all for now! I know that there is still more interesting research to comment, but in this post I decided to focus on a limited set. Just to name a few, here is a short list of articles that I have not commented, in case you want to check them out:
 

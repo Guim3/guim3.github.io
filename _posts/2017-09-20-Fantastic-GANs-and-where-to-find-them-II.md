@@ -56,6 +56,8 @@ GANs in a nutshell.
 Here I'm going to describe in chronological order the most relevant GAN articles that have been published lately. 
 
 ### <a name="impWGANs"></a> Improved WGANs (WGAN-GP)
+<div class="date">March 2017</div>
+
 **TL;DR:** take Wasserstein GANs and remove weight clipping - which is the cause of some undesirable behaviours - for gradient penalty. This results in faster convergence, higher quality samples and a more stable training. 
 
 [[Article]][impWGAN_paper] [[Code]][impWGAN_code]
@@ -89,6 +91,7 @@ you want an improved version of the WGAN which
 
 
 ### <a name="BEGANs"></a> Boundary Equilibrium GANs (BEGANs)
+<div class="date">March 2017</div>
 
 **TL;DR:** GANs using an auto-encoder as the discriminator. They can be successfully trained with simple architectures. They incorporate a dynamic term that balances both discriminator and generator during training. 
 
@@ -112,6 +115,7 @@ This might be a lot of information at once, but I'm sure that, once we see how t
 **Results.** BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is impressive*:
 
 ![BEGAN face samples]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/BEGAN_samples.jpg){:height="auto" width="400px" .center-image}
+BEGANs realistic generated images.
 {: .img-caption}
 
 *However, there's an important detail to be considered in this paper. They are using an unpublished dataset which is almost twice the size of the widely used [CelebA][celeba] dataset. Then, for a more realistic qualitative comparison, I invite you to check [any public implementation][BEGAN-tf] using CelebA and see the generated samples.
@@ -122,6 +126,7 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 ... for the same reasons you would use WGANs-GP. They both offer very similar results (stable training, simple architecture, loss function correlated to image quality), they mainly differ in their approach. Due to the hard nature of evaluating generative models, it's difficult to say which is better. As Theis et al. says in [their paper][Theis], you should choose a evaluation method or another depending on the application. In this case, WGAN-GP has a better Inception score and yet BEGANs generate very high-quality samples. Both are innovative and promising.
 
 ### <a name="ProGANs"></a> Progressive growings of GANs
+<div class="date">October 2017</div>
 
 **TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed. The quality of the generated images is astonishing.
 
@@ -134,7 +139,7 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 1. Start with the generator and discriminator training with low-resolution images.
 2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
 
-![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
+![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="600px" .center-image}
 {: .img-caption}
 
 <p style="margin-left: 23px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
@@ -187,6 +192,8 @@ These GANs don't require paired datasets to learn to translate between domains, 
 
 This mapping from one domain to another is different from the also popular [neural style transfer][neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
+![]({{site.baseurl}}/files/blog/common/separator1.png){.center-image}
+
 ## <a name="useful-resources"></a> Other useful resources
 
 Here are a bunch of links to other interesting posts:
@@ -199,7 +206,7 @@ Here are a bunch of links to other interesting posts:
 * [High-resolution generated images][high_res_GANs]: this is more of a curiosity, but here you can actually see how 4k x 4k generated images actually look like.
 * [Waifus generator][waifu_generator]: you'll never feel alone ever again ( ͡° ͜ʖ ͡°)
 
----
+![]({{site.baseurl}}/files/blog/common/separator2.png){:height="auto" width="250px" .center-image}
 
 <a name="closing"></a> 
 Hope this post has been useful! I want to say thanks to Blair Young for his comments to help me improving this post. As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences. Feel free also to leave a comment!
@@ -228,7 +235,7 @@ Oh, and I have just created my new [twitter account][twitter]. I'll be sharing m
 [GAN_playground]: https://reiinakano.github.io/gan-playground/
 [ProGANs_article]: https://arxiv.org/abs/1710.10196
 [ProGANs_code]: https://github.com/tkarras/progressive_growing_of_gans
-[StackGANs]: https://arxiv.org/pdf/1612.03242.pdf
+[StackGANs]: http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them#StackGANs
 [waifu_generator]: http://make.girls.moe/#/
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style

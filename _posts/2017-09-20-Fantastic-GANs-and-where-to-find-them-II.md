@@ -2,7 +2,7 @@
 layout: post
 title: Fantastic GANs and where to find them II
 date: 2017-11-19
-published: false
+published: true
 ---
 
 Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead](#refresher), though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémon. Even Andrej Karpathy himself finds it difficult to keep up to date:
@@ -134,14 +134,15 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 1. Start with the generator and discriminator training with low-resolution images.
 2. At some point (e.g. when they start to converge) increase the resolution. This is done very elegantly with a "transition period" / smoothing:
 
-    ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
+![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
 
-    Instead of just adding a new layer directly, it's added on small linear steps controlled by α.
-    Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer.	
-    The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.
+<p style="margin-left: 15px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
+<p style="margin-left: 15px">Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer. The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.</p>
 
-3\. Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution.
+<ol start="3">
+  <li>Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution</li>
+</ol>
 
 **But, wait a moment...**
 isn't this upsampling and concatenation of new high-resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs - which need to be trained separately - per upsampling. Do you want to upsample 3 times? Train 3 GANs. 

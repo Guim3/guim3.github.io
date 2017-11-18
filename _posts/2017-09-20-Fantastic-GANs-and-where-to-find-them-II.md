@@ -155,7 +155,7 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 
 **Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x (1024x1024 images). The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
 
-<iframe width="415" height="415" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
 The resulting generated images are clearly superior to any other GAN seen before.
 {: .img-caption}
 
@@ -192,7 +192,7 @@ These GANs don't require paired datasets to learn to translate between domains, 
 
 This mapping from one domain to another is different from the also popular [neural style transfer][neural_style_transfer]. The latter combines the content of one image with the style of another, whilst Cycle GANs learn a high level feature mapping from one domain to another. As a consequence, Cycle GANs are more general and can also be used for all sorts of mappings such as converting a sketch of an object into a real object.
 
-![]({{site.baseurl}}/files/blog/common/separator1.png){:height="auto" .center-image}
+![]({{site.baseurl}}/files/blog/common/separator1.png){: .center-image}
 
 Let's recap. We have had two major improvements, WGANs-GP and BEGANs. Despite following different research directions, they both offer similar advantages. Then, we have ProGANs (based on WGANs-GP), which unlock the path to generate realistic high-resolution images. Meanwhile, CycleGANs reminds us about the power of GANs to extract meaningful information from a dataset and how this information can be transferred to another unrelated data distribution. 
 

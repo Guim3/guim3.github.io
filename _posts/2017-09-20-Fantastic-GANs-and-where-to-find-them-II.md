@@ -185,7 +185,7 @@ The resulting generated images are clearly superior to any other GAN seen before
 
 Cycle GANs are, at the moment of writing these words, the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
 
-![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="400px" .center-image}
+![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="650px" .center-image}
 {: .img-caption}
 
 These GANs don't require paired datasets to learn to translate between domains, which is good because this kind of data is very difficult to obtain. However, Cycle GANs still need to be trained with data from two different domains X and Y (e.g. X: horses, Y: zebras). In order to constrain the translation from one domain to another, they use what they call a "cycle consistent loss". This basically means that if you translate a horse A into a zebra A, transforming the zebra A back to a horse should give you the original horse A as a result.
@@ -208,7 +208,9 @@ Here are a bunch of links to other interesting posts:
 * [High-resolution generated images][high_res_GANs]: this is more of a curiosity, but here you can actually see how 4k x 4k generated images actually look like.
 * [Waifus generator][waifu_generator]: you'll never feel alone ever again ( ͡° ͜ʖ ͡°)
 
+<br>
 ![]({{site.baseurl}}/files/blog/common/separator2.png){:height="auto" width="250px" .center-image}
+<br>
 
 <a name="closing"></a> 
 Hope this post has been useful! I want to say thanks to Blair Young for his comments to help me improving this post. As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences. Feel free also to leave a comment!

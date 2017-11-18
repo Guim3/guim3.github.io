@@ -146,7 +146,7 @@ There are lots of interesting articles on the subject. Among them, I highlight t
 
 ![Learning what and where to draw figure]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/Reed_figure.jpg){: .center-image }
 
-* __StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low-resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generating high-quality images. See it by yourself:
+* <a name="StackGANs"></a>__StackGAN__ [[article]][StackGAN_art] [[code]][StackGAN_code]: this is a similar paper to the previous one. In this case, they focus on improving the quality of the image by using 2 GANs at the same time: Stage-I and Stage-II. Stage-I is used to get a low-resolution image containing the "general" idea of the image. Stage-II refines Stage-I's images with more details and higher resolution. This paper has, to my knowledge, one of the bests models when it comes to generating high-quality images. See it by yourself:
 
 ![Samples from StackGAN]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them/StackGAN_samples.jpg){: :height="auto" width="490px" .center-image }
 

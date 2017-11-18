@@ -137,8 +137,8 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="400px" .center-image}
 {: .img-caption}
 
-<p style="margin-left: 15px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
-<p style="margin-left: 15px">Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer. The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.</p>
+<p style="margin-left: 20px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
+<p style="margin-left: 20px">Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer. The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.</p>
 
 <ol start="3">
   <li>Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution</li>

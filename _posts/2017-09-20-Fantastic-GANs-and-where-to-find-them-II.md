@@ -115,7 +115,6 @@ This might be a lot of information at once, but I'm sure that, once we see how t
 **Results.** BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is quite impressive*:
 
 ![BEGAN face samples]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/BEGAN_samples.jpg){:height="auto" width="400px" .center-image}
-BEGANs realistic generated images. Some of them look completely real.
 {: .img-caption}
 
 *However, there's an important detail to be considered in this paper. They are using an unpublished dataset which is almost twice the size of the widely used [CelebA][celeba] dataset. Then, for a more realistic qualitative comparison, I invite you to check [any public implementation][BEGAN-tf] using CelebA and see the generated samples.
@@ -156,7 +155,6 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 **Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x on 1024x1024 images. The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
-The resulting generated images are clearly superior to any other GAN seen before.
 {: .img-caption}
 
 **Other improvements**. Additionally, the paper proposes new design decisions to further improve the performance of the model. I'll briefly describe them:

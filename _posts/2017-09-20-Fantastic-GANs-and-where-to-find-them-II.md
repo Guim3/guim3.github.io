@@ -2,7 +2,7 @@
 layout: post
 title: Fantastic GANs and where to find them II
 date: 2017-11-19
-published: false
+published: true
 ---
 
 Hello again! This is the follow-up blog post of the original [Fantastic GANs and where to find them][original_post]. If you haven't checked that article or you are completely new to GANs, consider giving it a quick read - there's a brief summary of the previous post [ahead](#refresher), though. It has been 8 months since the last post and GANs aren't exactly known for being a field with few publications. In fact, I don't think we are very far from having more types of GAN names than Pokémon. Even Andrej Karpathy himself finds it difficult to keep up to date:
@@ -20,7 +20,7 @@ This is what you __won't__ find in this post:
 * An exhaustive research list (you can already find one [here][GANpapers]).
 
 #### What this post is about
-* A summary of relevant topics about GANs, starting where I left it on the [previous post](#original_post).
+* A summary of relevant topics about GANs, starting where I left it on the [previous post][original_post].
 * A lot of links to other sites, posts and articles so you can decide where to focus on.
 
 #### Index
@@ -46,7 +46,7 @@ GANs in a nutshell.
 * **Relevant models from previous post:**
 	1. _Generative Adversarial Networks_: the original, vanilla, GANs.
 	2. _Deep Convolutional GANs (DCGANs)_: first major improvement on the GAN architecture in terms of training stability and quality of the samples.
-	3. _Improved DCGANs_: another improvement over the previous baseline, DCGANs. It allows generating higher-resolution images.
+	3. _Improved DCGANs_: another improvement over the previous DCGAN baseline. It allows generating higher-resolution images.
 	4. _Conditional GANs (cGANs)_: GANs that use label information to enhance the quality of the images and control how these images will look.
 	5. _InfoGANs_: this type is able to encode meaningful image features in a completely unsupervised way. For example, on the digit dataset MNIST, they encode the rotation of the digit.
 	6. _Wasserstein GANs (WGANs)_: redesign of the original loss function, which correlates with image quality. This also improves training stability and makes WGANs less reliant on the network architecture.
@@ -68,7 +68,7 @@ Here I'm going to describe in chronological order the most relevant GAN articles
 Here you can see how a WGAN fails to model 8 Gaussians (left) because it uses simple functions. On the other hand, a WGAN-GP correctly models them using more complex functions (right). 
 {: .img-caption}
 
-**Gradient penalty.** So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method which they call gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is why it's call gradient penalty, as it penalizes gradients which norms deviate from 1.
+**Gradient penalty.** So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method called gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is why it's call gradient penalty, as it penalizes gradients which norms deviate from 1.
 
 **Advantages.** As a result, WGANs trained using GP rather than weight clipping have faster convergence. Additionally, the training is much more stable to an extent where hyperparameter tuning is no longer required and the architecture used is not as critical. These WGAN-GP also generate high-quality samples, but it is difficult to tell by how much. On proven and tested architectures, the quality of these samples are very similar to the baseline WGAN:
 
@@ -112,10 +112,10 @@ This might be a lot of information at once, but I'm sure that, once we see how t
 
 **Diversity factor.** Another interesting contribution is what they call the diversity factor. This factor controls how much you want the discriminator to focus on getting a perfect reconstruction on real images (quality) vs distinguish real images from generated (diversity). Then, they go one step further and use this diversity factor to maintain a balance between the generator and discriminator during training. Similarly to WGANs, they use this equilibrium between both networks as a measure of convergence that correlates with image quality. However, unlike WGANs (and WGANs-GP), they use Wasserstein distance in such a way that the Lipschitz constrain is not required.
 
-**Results.** BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is impressive*:
+**Results.** BEGANs do not need any fancy architecture to train properly; as mentioned in the paper: "no batch normalization, no dropout, no transpose convolutions and no exponential growth for convolution filters". The quality of the generated samples (128x128) is quite impressive*:
 
 ![BEGAN face samples]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/BEGAN_samples.jpg){:height="auto" width="400px" .center-image}
-BEGANs realistic generated images.
+BEGANs realistic generated images. Some of them look completely real.
 {: .img-caption}
 
 *However, there's an important detail to be considered in this paper. They are using an unpublished dataset which is almost twice the size of the widely used [CelebA][celeba] dataset. Then, for a more realistic qualitative comparison, I invite you to check [any public implementation][BEGAN-tf] using CelebA and see the generated samples.
@@ -132,7 +132,7 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 
 [[Article]][ProGANs_article] [[Code]][ProGANs_code]
 
-Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to fail because the details are more subtle and complex to model. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
+Generating high-resolution images is a big challenge. The larger the image, the easier is for the network to fail because it needs to learn to generate more subtle and complex details. To give a little bit of context, before this article, realistic generated images were around 256x256. Progressive GANs (ProGANs) take this to a whole new level by successfully generating completely realistic 1024x1024 images. Let's see how.
 
 **Idea.** ProGANs, which are built upon [WGANs-GP](#impWGANs), introduce a smart way to progressively add new layers on training time. Each one of these layers upsamples the images to a higher resolution for both the discriminator and generator. Let's go step by step:
 
@@ -142,18 +142,18 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/proGANs_smoothing.jpg){:height="auto" width="600px" .center-image}
 {: .img-caption}
 
-<p style="margin-left: 23px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
-<p style="margin-left: 23px">Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer. The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.</p>
+<p style="margin-left: 40px">Instead of just adding a new layer directly, it's added on small linear steps controlled by α.</p>
+<p style="margin-left: 40px">Let's see what happens in the generator. At the beginning, when α = 0, nothing changes. All the contribution of the output is from the previous low-resolution layer (16x16). Then, as α is increased, the new layer (32x32) will start getting its weights adjusted through backpropagation. By the end, α will be equal to 1, meaning that we can totally drop the "shortcut" used to skip the 32x32 layer. The same happens to the discriminator, but the other way around: instead of making the image larger, we make it smaller.</p>
 
 <ol start="3">
-  <li>Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution</li>
+  <li>Once the transition is done, keep training the generator and discriminator. Go to step 2 if the resolution of currently generated images is not the target resolution.</li>
 </ol>
 
 **But, wait a moment...**
 isn't this upsampling and concatenation of new high-resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs - which need to be trained separately - per upsampling. Do you want to upsample 3 times? Train 3 GANs. 
 On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding more layers on training time, as opposed to training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off elegantly, with better results and without extra conditional information.
 
-**Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x (1024x1024 images). The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
+**Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x on 1024x1024 images. The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
 The resulting generated images are clearly superior to any other GAN seen before.
@@ -177,7 +177,7 @@ The resulting generated images are clearly superior to any other GAN seen before
 #### You might want to use ProGANs...
 * If you want state-of-the-art results. But consider that...
 * ... you will need *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
-* If you want to start questioning your own reality. The next iterations on GANs will might create more realistic samples than real life.
+* If you want to start questioning your own reality. The next iterations on GANs might create more realistic samples than real life.
 
 #### <a name="honorable-mention"></a> Honorable mention: Cycle GANs
 
@@ -194,7 +194,7 @@ This mapping from one domain to another is different from the also popular [neur
 
 ![]({{site.baseurl}}/files/blog/common/separator1.png){: .center-image}
 
-Let's recap. We have had two major improvements, WGANs-GP and BEGANs. Despite following different research directions, they both offer similar advantages. Then, we have ProGANs (based on WGANs-GP), which unlock the path to generate realistic high-resolution images. Meanwhile, CycleGANs reminds us about the power of GANs to extract meaningful information from a dataset and how this information can be transferred to another unrelated data distribution. 
+Let's recap. We have had two major improvements, WGANs-GP and BEGANs. Despite following different research directions, they both offer similar advantages. Then, we have ProGANs (based on WGANs-GP), which unlock a clear path to generate realistic high-resolution images. Meanwhile, CycleGANs reminds us about the power of GANs to extract meaningful information from a dataset and how this information can be transferred to another unrelated data distribution. 
 
 ## <a name="useful-resources"></a> Other useful resources
 

@@ -246,4 +246,4 @@ Oh, and I have just created my new [twitter account][twitter]. I'll be sharing m
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style
 [twitter]: https://twitter.com/GuimPML
-[reddit]: TODO
+[reddit]: https://www.reddit.com/r/MachineLearning/comments/7e2zis/d_fantastic_gans_and_where_to_find_them_ii/

@@ -181,7 +181,7 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 
 [[Article]][CycleGANs_article] [[Code]][CycleGANs_code]
 
-Cycle GANs are, at the moment of writing these words, the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Cycle GANs are the answer. 
+Cycle GANs are, at the moment of writing these words, the most advanced image-to-image translation using GANs. Tired that your horse is not a zebra? Or maybe that Instagram photo needs more winter? Say no more. 
 
 ![ProGANs smoothing]({{site.baseurl}}/files/blog/Fantastic-GANs-and-where-to-find-them-II/CycleGANs_results.jpg){:height="auto" width="650px" .center-image}
 {: .img-caption}

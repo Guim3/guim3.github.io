@@ -211,7 +211,7 @@ Here are a bunch of links to other interesting posts:
 <br>
 
 <a name="closing"></a> 
-Hope this post has been useful and thanks for reading!! I want to also say thanks to Blair Young for helping me improving this post with his feedback. If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [this reddit thread][reddit].
+Hope this post has been useful and thanks for reading!! I want to also say thanks to [Blair Young][Blair_twitter] for helping me improving this post with his feedback. If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [this reddit thread][reddit].
 
 As a side note, I'm currently living in London. If you are in town and a GAN nerd like me and want to talk about all types of GANs, complain about the evaluation of generative models or want my opinion about your groundbreaking state-of-the-art meme generator, drop me an email! I'm always happy to grab a drink and share experiences.
 
@@ -245,3 +245,4 @@ Oh, and I have just created my new [twitter account][twitter]. I'll be sharing m
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style
 [twitter]: https://twitter.com/GuimPML
 [reddit]: https://www.reddit.com/r/MachineLearning/comments/7e2zis/d_fantastic_gans_and_where_to_find_them_ii/
+[Blair_twitter]: https://twitter.com/BluTripleR

@@ -5,6 +5,8 @@ date: 2017-03-20
 published: true
 ---
 
+This is a series of blog posts. [Click here][2nd_post] for the second part.
+
 Have you ever wanted to know about Generative Adversarial Networks (GANs)? Maybe you just want to catch up on the topic? Or maybe you simply want to see how these networks have been refined over these last years? Well, in these cases, this post might interest you! 
 
 #### What this post is not about
@@ -276,3 +278,4 @@ Thanks for reading! If you think there's something wrong, inaccurate or want to 
 [GANcodes]: https://github.com/wiseodd/generative-models
 [DiscoGANs]: https://github.com/SKTBrain/DiscoGAN
 [reddit]: https://www.reddit.com/r/MachineLearning/comments/60fxut/d_fantastic_gans_and_where_to_find_them/
+[2nd_post]: http://guimperarnau.com/blog/2017/11/Fantastic-GANs-and-where-to-find-them-II

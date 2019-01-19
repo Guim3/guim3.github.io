@@ -68,7 +68,7 @@ Here I'm going to describe in chronological order the most relevant GAN articles
 Here you can see how a WGAN fails to model 8 Gaussians (left) because it uses simple functions. On the other hand, a WGAN-GP correctly models them using more complex functions (right). 
 {: .img-caption}
 
-**Gradient penalty.** So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method called gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is why it's call gradient penalty, as it penalizes gradients which norms deviate from 1.
+**Gradient penalty.** So how do we get rid of weight clipping? The authors of the WGAN-GP (where GP stands for gradient penalty) propose enforcing the Lipschitz constraint using another method called gradient penalty. Basically, GP consists of restricting some gradients to have a norm of 1. This is why it's called gradient penalty, as it penalizes gradients which norms deviate from 1.
 
 **Advantages.** As a result, WGANs trained using GP rather than weight clipping have faster convergence. Additionally, the training is much more stable to an extent where hyperparameter tuning is no longer required and the architecture used is not as critical. These WGAN-GP also generate high-quality samples, but it is difficult to tell by how much. On proven and tested architectures, the quality of these samples are very similar to the baseline WGAN:
 
@@ -99,13 +99,13 @@ you want an improved version of the WGAN which
 
 _Fun fact: BEGANs were published on the very same day as the WGAN-GP paper._
 
-**Idea.** What sets BEGANSs apart from other GANs is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are auto-encoders not the devil as they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two points:
+**Idea.** What sets BEGANs apart from other GANs is that they use an auto-encoder architecture for the discriminator (similarly to [EBGANs][EBGANs]) and a special loss adapted for this scenario. What is the reason behind this choice? Are auto-encoders not the devil as they force us to have a pixel reconstruction loss that makes [blurry generated samples][VAEs_blurry]? To answer these questions we need to consider these two points:
 
-1. Why reconstruction loss? The explanation from the authors is that we can rely on the assumption that matching the reconstruction loss distribution will end up matching the sample distributions.
+1. Why reconstruction loss? The explanation from the authors is that we can rely on the assumption that, by matching the reconstruction loss distribution, we will also end up matching the real sample distributions.
 
 2. Which leads us to: how? An important remark is that the reconstruction loss from the auto-encoder/discriminator (i.e. given this input image, give me the best reconstruction) is not the final loss that BEGANs are minimizing. This reconstruction loss is just a step to calculate the final loss. And the final loss is calculated using the Wasserstein distance (yes, it's everywhere now) between the reconstruction loss on real and generated data.
 
-This might be a lot of information at once, but I'm sure that, once we see how this loss function is applied to the generator and discriminator, it'll be much clearer:
+This might be a lot of information at once but, once we see how this loss function is applied to the generator and discriminator, it'll be much clearer:
 
 * The generator focuses on generating images that the discriminator will be able to reconstruct well.
 * The discriminator tries to reconstruct real images as good as possible while reconstructing generated images with the maximum error.
@@ -127,7 +127,7 @@ As a final note, if you want to know more about BEGANs, I recommend reading this
 ### <a name="ProGANs"></a> Progressive growing of GANs (ProGANs)
 <div class="date">October 2017</div>
 
-**TL;DR:** Progressively add new high-resolution layers during training that generates incredibly realistic images. Other improvements and a new evaluation method are also proposed. The quality of the generated images is astonishing.
+**TL;DR:** Progressively add new high-resolution layers during training that generate incredibly realistic images. Other improvements and a new evaluation method are also proposed. The quality of the generated images is astonishing.
 
 [[Article]][ProGANs_article] [[Code]][ProGANs_code]
 
@@ -149,10 +149,10 @@ Generating high-resolution images is a big challenge. The larger the image, the 
 </ol>
 
 **But, wait a moment...**
-isn't this upsampling and concatenation of new high-resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs - which need to be trained separately - per upsampling. Do you want to upsample 3 times? Train 3 GANs. 
-On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding more layers on training time, as opposed to training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off elegantly, with better results and without extra conditional information.
+isn't this upsampling and concatenation of new high-resolution images something already done in [StackGANs][StackGANs] (and the new [StackGANs++][StackGAN++])? Well, yes and no. First of all, StackGANs are text-to-image conditional GANs that use text descriptions as an additional input while ProGANs don't use any kind of conditional information. But, more interestingly, despite both StackGANs and ProGANs using concatenation of higher resolution images, StackGANs require as many independent pairs of GANs — which need to be trained separately — per upsampling. Do you want to upsample 3 times? Train 3 GANs. 
+On the other hand, in ProGANs only a single GAN is trained. During this training, more upsampling layers are *progressively* added to upsample the images. So, the cost of upsampling 3 times is just adding more layers on training time, as opposed to training from scratch 3 new GANs. In summary, ProGANs use a similar idea from StackGANs and they manage to pull it off more elegantly, with better results and without extra conditional information.
 
-**Results.** As a result of this progressive training, generated images in ProGANs have higher quality and training time is reduced by 5.4x on 1024x1024 images. The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
+**Results.** As a result of this progressive training, generated images in ProGANs are of higher quality and training time is reduced by 5.4x on 1024x1024 images. The reasoning behind this is that a ProGAN doesn't need to learn all large-scale and small-scale representations at once. In a ProGAN, first the small-scale are learnt (i.e. low-resolution layers converge) and then the model is free to focus on refining purely the large-scale structures (i.e. new high-resolution layers converge).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XOxxPcy5Gr4" frameborder="0" allowfullscreen></iframe>{: .center-image }
 {: .img-caption}
@@ -165,9 +165,9 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 
 * Pixelwise normalization: on the generator, each feature vector is normalized after each convolutional layer (exact formula in the paper). This is done to prevent the magnitudes of the gradients of the generator and discriminator from escalating.
 
-**CelebA-HQ**. As a side note, it is worth mentioning that the authors enhanced and prepared the original CelebA for high-resolution training: CelebA-HQ. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce a depth-of-field effect, and detect landmarks on the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
+**CelebA-HQ**. As a side note, it is worth mentioning that the authors enhanced and prepared the original CelebA for high-resolution training. In a nutshell, they remove artifacts, apply a Gaussian filtering to produce a depth-of-field effect, and detect landmarks on the face to finally get a 1024x1024 crop. After this process, they only keep the best 30k images out of 202k.
 
-**Evaluation**. Finally, a new evaluation method is introduced:
+**Evaluation**. Last but not least, they introduce a new evaluation method:
 * The idea behind it is that the local image structure of generated images should match the structure of the training images. 
 * How do we measure local structure? With a Laplacian pyramid, where you get different levels of spatial frequency bands that can be used as descriptors. 
 * Then, we extract descriptors from the generated and real images, normalize them, and check how close they are using the famous Wasserstein distance. The lower the distance, the better.
@@ -175,7 +175,7 @@ On the other hand, in ProGANs only a single GAN is trained. During this training
 #### You might want to use ProGANs...
 * If you want state-of-the-art results. But consider that...
 * ... you will need *a lot* of time to train the model: "We trained the network on a single NVIDIA Tesla P100 GPU for 20 days".
-* If you want to start questioning your own reality. The next iterations on GANs might create more realistic samples than real life.
+* If you want to start questioning your own reality. Next GAN iterations might create more realistic samples than real life.
 
 #### <a name="honorable-mention"></a> Honorable mention: Cycle GANs
 
@@ -211,7 +211,7 @@ Here are a bunch of links to other interesting posts:
 <br>
 
 <a name="closing"></a> 
-Hope this post has been useful and thanks for reading!! I want to also say thanks to [Blair Young][Blair_twitter] for 
+Hope this post has been useful and thanks for reading! I want to also say thanks to [Blair Young][Blair_twitter] for 
 his feedback on this post. If you think there's something wrong, inaccurate or want to make any suggestion, please let me know in the comment section below or in [this reddit thread][reddit].
 
 Oh, and I have just created my new [twitter account][twitter]. I'll be sharing my new blog posts there. 

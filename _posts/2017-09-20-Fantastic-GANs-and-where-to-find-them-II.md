@@ -216,7 +216,7 @@ his feedback on this post. If you think there's something wrong, inaccurate or w
 
 Oh, and I have just created my new [twitter account][twitter]. I'll be sharing my new blog posts there. 
 
-[original_post]: http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them
+[original_post]: https://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them
 [GANpapers]: https://github.com/zhangqianhui/AdversarialNetsPapers
 [GANs_everything]: https://github.com/GKalliatakis/Delving-deep-into-GANs
 [GAN_theories]: https://github.com/YadiraF/GAN_Theories
@@ -238,7 +238,7 @@ Oh, and I have just created my new [twitter account][twitter]. I'll be sharing m
 [GAN_playground]: https://reiinakano.github.io/gan-playground/
 [ProGANs_article]: https://arxiv.org/abs/1710.10196
 [ProGANs_code]: https://github.com/tkarras/progressive_growing_of_gans
-[StackGANs]: http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them#StackGANs
+[StackGANs]: https://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them#StackGANs
 [waifu_generator]: http://make.girls.moe/#/
 [GANs_timeline]: https://github.com/dongb5/GAN-Timeline
 [neural_style_transfer]: https://github.com/jcjohnson/neural-style

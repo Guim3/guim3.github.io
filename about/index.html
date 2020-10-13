@@ -2,11 +2,11 @@
 layout: default
 title: About
 ---
-<h1>{{ page.title }} <a href="/about/Guim_Perarnau_Resume.pdf" target="_blank">[CV/Résumé]</a></h1>
+<h1>{{ page.title }} <a href="/about/Guim_Perarnau_Resume.pdf" target="_blank">[CV]</a></h1>
 <div class="blurb">
 	<div class='warn'><span class="triangle">&#9888;</span><span class="text">Caution: bragging zone incoming<span></div>
 	 
-	<p>Hi there, I'm Guim Perarnau!</p>
+	<p>Hey, I'm Guim!</p>
 	<p>I'm interested in applying deep learning to solve real world problems <s>and create a super-human AI that will enslave us all</s>.
 	</p>
 	<p>I graduated from Autonomous University of Barcelona in September 2016 with an M.Sc. in Computer Vision and a B.Sc. in Computer Science, both with honors. I also was awarded the best final degree project and best master thesis. During that time, I interned at the <a href="http://www.cvc.uab.es/">Computer Vision Center</a> for 10 months doing machine learning research projects.</p>
@@ -21,27 +21,12 @@ title: About
 	</ul>
 		
 	<h3>Contact</h3>
-	<p>I really enjoy any chance to learn from people: there's always something new to learn from anybody. Feel free to reach out!</p>
 	<ul class="fa-ul">
 		<li class="contact-item">
 		    <a href="#">
 		      <i class="fa-li fa fa-envelope"></i> [name][surname] at gmail dot com
 		    </a>
 		</li>
-		{% if site.twitter_username %}
-		<li class="contact-item">
-		    <a href="https://twitter.com/{{ site.twitter_username }}">
-		      <i class="fa-li fa fa-twitter"></i> Twitter
-		    </a>
-		</li>
-		{% endif %}
-		{% if site.github_username %}
-		<li class="contact-item">
-		    <a href="https://github.com/{{ site.github_username }}">
-		      <i class="fa-li fa fa-github"></i> GitHub
-		    </a>
-		</li>
-		{% endif %}
 		{% if site.linkedin_username %}
 		<li class="contact-item">
 		    <a href="https://linkedin.com/in/{{ site.linkedin_username }}">
